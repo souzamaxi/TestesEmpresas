@@ -18,6 +18,10 @@ type
     Label4: TLabel;
     DBLookupComboBox1: TDBLookupComboBox;
     dbNMTITULAR: TDBEdit;
+    dbNOCNPJCPF: TDBEdit;
+    Label5: TLabel;
+    dbNOINCRICAORG: TDBEdit;
+    Label6: TLabel;
     procedure btnBuscarClick(Sender: TObject);
     procedure btnExcluirClick(Sender: TObject);
     procedure btnSalvarClick(Sender: TObject);

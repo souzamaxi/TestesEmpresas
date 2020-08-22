@@ -20,6 +20,8 @@ type
     dbNMTITULAR: TDBEdit;
     procedure btnBuscarClick(Sender: TObject);
     procedure btnExcluirClick(Sender: TObject);
+    procedure btnSalvarClick(Sender: TObject);
+    procedure btnNovoClick(Sender: TObject);
   private
     { Private declarations }
     function ValidarCadastroPessoa: Boolean;
@@ -63,13 +65,30 @@ begin
     abort;
 end;
 
+procedure TfrmPessoas.btnNovoClick(Sender: TObject);
+begin
+  inherited;
+  dbNMTITULAR.SetFocus;
+end;
+
+procedure TfrmPessoas.btnSalvarClick(Sender: TObject);
+begin
+  if ValidarCadastroPessoa then
+    inherited;
+
+end;
+
 function TfrmPessoas.ValidarCadastroPessoa: Boolean;
 var
   ok: Boolean;
 begin
   ok := True;
   if dmPessoas.cdsCadPessoa.FieldByName('IDEMPRESA').AsInteger = 0 then
-    ok := False;
+  begin
+    Result := False;
+    Application.MessageBox('Falta informar uma empresa para o cadastro!', 'SISTEMA', MB_ICONEXCLAMATION + MB_OK + MB_SYSTEMMODAL);
+    Abort
+  end;
 
   Result := ok;
 end;

@@ -65,7 +65,7 @@ inherited frmPessoas: TfrmPessoas
       end
     end
     inherited tabDados: TTabSheet
-      ExplicitLeft = 1
+      ExplicitLeft = 4
       ExplicitTop = 24
       ExplicitWidth = 497
       ExplicitHeight = 215
@@ -145,7 +145,7 @@ inherited frmPessoas: TfrmPessoas
       end
       object dbNOINCRICAORG: TDBEdit
         Left = 138
-        Top = 112
+        Top = 116
         Width = 121
         Height = 21
         DataField = 'NOINCRICAORG'

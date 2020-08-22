@@ -13,19 +13,49 @@ inherited frmPessoas: TfrmPessoas
   end
   inherited pcPrincipal: TPageControl
     Height = 243
-    ActivePage = tabDados
     ExplicitHeight = 243
     inherited tabPesquisar: TTabSheet
       ExplicitLeft = 4
       ExplicitHeight = 215
       inherited Panel1: TPanel
         inherited btnBuscar: TButton
+          Left = 423
           OnClick = btnBuscarClick
+          ExplicitLeft = 423
         end
       end
       inherited grDados: TDBGrid
         Height = 174
         DataSource = dsPqPessoas
+        Columns = <
+          item
+            Expanded = False
+            FieldName = 'IDTITULAR'
+            Title.Caption = 'C'#243'digo'
+            Width = 60
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'NMTITULAR'
+            Title.Caption = 'Nome Pessoa'
+            Width = 250
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'NOCNPJCPF'
+            Title.Caption = 'CNPJ/CPF'
+            Width = 100
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'STATIVO'
+            Title.Caption = 'Ativo'
+            Width = 30
+            Visible = True
+          end>
       end
     end
     inherited tabDados: TTabSheet
@@ -45,6 +75,13 @@ inherited frmPessoas: TfrmPessoas
         Height = 13
         Caption = 'Nome'
       end
+      object Label4: TLabel
+        Left = 11
+        Top = 51
+        Width = 37
+        Height = 13
+        Caption = 'C'#243'digo:'
+      end
       object dbIDTITULAR: TDBEdit
         Left = 11
         Top = 24
@@ -61,23 +98,23 @@ inherited frmPessoas: TfrmPessoas
         Height = 21
         DataField = 'IDEMPRESA'
         DataSource = dsPrincipal
-        KeyField = 'NMEMPRESA'
-        ListField = 'IDEMPRESA;NMEMPRESA'
+        KeyField = 'IDEMPRESA'
+        ListField = 'NMEMPRESA;IDEMPRESA'
         ListSource = dsComboEmpresa
+        TabOrder = 2
+      end
+      object dbNMTITULAR: TDBEdit
+        Left = 138
+        Top = 24
+        Width = 347
+        Height = 21
+        DataField = 'NMTITULAR'
+        DataSource = dsPrincipal
         TabOrder = 1
       end
     end
   end
-  object dbNMTITULAR: TDBEdit [2]
-    Left = 142
-    Top = 48
-    Width = 347
-    Height = 21
-    DataField = 'NMTITULAR'
-    DataSource = dsPrincipal
-    TabOrder = 2
-  end
-  object dsPqPessoas: TDataSource [3]
+  object dsPqPessoas: TDataSource [2]
     DataSet = dmPessoas.cdsPqPessoas
     Left = 296
     Top = 24
