@@ -1,0 +1,32 @@
+unit uFuncoesDB;
+
+interface
+
+uses
+  Data.DB, Data.SqlExpr;
+
+  function PegarCodigoAutoIncrement(sTabela: string): Integer;
+
+implementation
+
+uses
+  udmPrincipal;
+
+function PegarCodigoAutoIncrement(sTabela: string): Integer;
+var
+  oDados: TSQLDataSet;
+begin
+  oDados := TSQLDataSet.Create(nil);
+  oDados.SQLConnection := dmPrincipal.Conexao;
+  try
+    oDados.Close;
+    oDados.CommandText := 'SELECT GEN_ID(GEN_' + sTabela + '_ID,0) AS ID FROM RDB$DATABASE';
+    oDados.Open;
+  finally
+    FreeAndNil(oDados);
+  end;
+
+  Result := oDados.FieldByName('ID').AsInteger;
+end;
+
+end.

@@ -1,0 +1,18 @@
+unit uFuncoes;
+
+interface
+
+uses
+  Vcl.Forms, System.Classes;
+
+  function AbrirFormulario(oForm: TForm; oPai: TComponent): Boolean;
+
+implementation
+
+function AbrirFormulario(oForm: TForm; oPai: TComponent): Boolean;
+begin
+  Result := True;
+  oForm.Create(nil);
+end;
+
+end.

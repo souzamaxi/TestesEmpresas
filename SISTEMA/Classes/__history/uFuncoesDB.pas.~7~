@@ -1,0 +1,25 @@
+unit uFuncoesDB;
+
+interface
+
+uses
+  Data.DB, Data.SqlExpr;
+
+  function PegarCodigoAutoIncrement(sGenerator: string): Int64;
+
+implementation
+
+uses
+  udmPrincipal;
+
+function PegarCodigoAutoIncrement(sGenerator: string): Int64;
+var
+  oDados: TSQLDataSet;
+begin
+  oDados := TSQLDataSet.Create(nil);
+  oDados.Close;
+  oDados.CommandText := 'SELECT GEN_ID(' + sGenerator + ',0) FROM RDB$DATABASE';
+  oDados.Open;
+end;
+
+end.

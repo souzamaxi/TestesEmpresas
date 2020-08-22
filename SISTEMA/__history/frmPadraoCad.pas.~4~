@@ -1,0 +1,39 @@
+unit frmPadraoCad;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ExtCtrls, Vcl.StdCtrls, Vcl.ComCtrls;
+
+type
+  TForm2 = class(TForm)
+    pnMenu: TPanel;
+    btnNovo: TButton;
+    btnSalvar: TButton;
+    btnExcluir: TButton;
+    btnFechar: TButton;
+    Button5: TButton;
+    pcPrincipal: TPageControl;
+    Pesquisar: TTabSheet;
+    Dados: TTabSheet;
+    procedure btnFecharClick(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  Form2: TForm2;
+
+implementation
+
+{$R *.dfm}
+
+procedure TForm2.btnFecharClick(Sender: TObject);
+begin
+  Close;
+end;
+
+end.

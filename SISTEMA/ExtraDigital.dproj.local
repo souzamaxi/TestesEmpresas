@@ -1,0 +1,57 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>2018/12/20 17:57:52.000.474,=C:\Users\Delphi\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2018/12/20 20:29:07.000.847,=C:\Users\Delphi\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2018/12/20 20:33:28.000.813,=C:\Users\Delphi\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2019/04/08 14:30:41.000.457,=C:\Users\Delphi\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2019/06/07 17:02:06.000.759,=C:\Users\Delphi\Documents\Embarcadero\Studio\Projects\ServerMethodsUnit1.pas</Transaction>
+    <Transaction>2019/06/07 17:02:06.000.482,=C:\Users\Delphi\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2019/06/07 17:02:16.000.364,=C:\Users\Delphi\Documents\Embarcadero\Studio\Projects\ServerContainerUnit1.pas</Transaction>
+    <Transaction>2019/08/12 11:13:44.000.514,=C:\Users\Delphi\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2019/08/23 17:13:48.000.693,=C:\Users\Delphi\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2019/09/19 10:22:08.000.748,=C:\Users\Delphi\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2019/10/29 19:21:05.000.832,=C:\Users\Delphi\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2019/11/15 19:19:15.000.090,=C:\Users\Delphi\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2020/08/22 09:24:10.365,=C:\Users\Delphi\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2020/08/22 09:25:34.948,C:\TesteExtradigital\SISTEMA\Formularios\frmPrincipal.pas=C:\Users\Delphi\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2020/08/22 09:25:34.948,C:\TesteExtradigital\SISTEMA\Formularios\frmPrincipal.dfm=C:\Users\Delphi\Documents\Embarcadero\Studio\Projects\Unit1.dfm</Transaction>
+    <Transaction>2020/08/22 09:29:59.773,C:\TesteExtradigital\SISTEMA\ExtraDigital.dproj=C:\Users\Delphi\Documents\Embarcadero\Studio\Projects\Project1.dproj</Transaction>
+    <Transaction>2020/08/22 09:33:21.774,=C:\TesteExtradigital\SISTEMA\Unit2.pas</Transaction>
+    <Transaction>2020/08/22 09:33:36.188,C:\TesteExtradigital\SISTEMA\Formularios\frmPessoas.pas=C:\TesteExtradigital\SISTEMA\Unit2.pas</Transaction>
+    <Transaction>2020/08/22 09:33:36.188,C:\TesteExtradigital\SISTEMA\Formularios\frmPessoas.dfm=C:\TesteExtradigital\SISTEMA\Unit2.dfm</Transaction>
+    <Transaction>2020/08/22 09:33:46.735,=C:\TesteExtradigital\SISTEMA\Unit3.pas</Transaction>
+    <Transaction>2020/08/22 09:33:59.943,C:\TesteExtradigital\SISTEMA\Formularios\frmEmpresas.dfm=C:\TesteExtradigital\SISTEMA\Unit3.dfm</Transaction>
+    <Transaction>2020/08/22 09:33:59.943,C:\TesteExtradigital\SISTEMA\Formularios\frmEmpresas.pas=C:\TesteExtradigital\SISTEMA\Unit3.pas</Transaction>
+    <Transaction>2020/08/22 09:34:50.817,C:\TesteExtradigital\SISTEMA\Formularios\frmPessoas.pas=</Transaction>
+    <Transaction>2020/08/22 09:34:50.904,C:\TesteExtradigital\SISTEMA\Formularios\frmEmpresas.pas=</Transaction>
+    <Transaction>2020/08/22 09:35:26.717,=C:\TesteExtradigital\SISTEMA\Unit2.pas</Transaction>
+    <Transaction>2020/08/22 09:35:57.489,C:\TesteExtradigital\SISTEMA\frmPadraoCad.pas=C:\TesteExtradigital\SISTEMA\Unit2.pas</Transaction>
+    <Transaction>2020/08/22 09:35:57.489,C:\TesteExtradigital\SISTEMA\frmPadraoCad.dfm=C:\TesteExtradigital\SISTEMA\Unit2.dfm</Transaction>
+    <Transaction>2020/08/22 09:44:35.574,C:\TesteExtradigital\SISTEMA\frmPadraoCad.pas=</Transaction>
+    <Transaction>2020/08/22 09:44:45.923,C:\TesteExtradigital\SISTEMA\Formularios\ufrmPrincipal.pas=C:\TesteExtradigital\SISTEMA\Formularios\frmPrincipal.pas</Transaction>
+    <Transaction>2020/08/22 09:44:45.923,C:\TesteExtradigital\SISTEMA\Formularios\ufrmPrincipal.dfm=C:\TesteExtradigital\SISTEMA\Formularios\frmPrincipal.dfm</Transaction>
+    <Transaction>2020/08/22 09:45:15.695,=C:\TesteExtradigital\SISTEMA\Formularios\frmPadraoCad.pas</Transaction>
+    <Transaction>2020/08/22 09:45:24.389,C:\TesteExtradigital\SISTEMA\Formularios\ufrmPadraoCad.dfm=C:\TesteExtradigital\SISTEMA\Formularios\frmPadraoCad.dfm</Transaction>
+    <Transaction>2020/08/22 09:45:24.389,C:\TesteExtradigital\SISTEMA\Formularios\ufrmPadraoCad.pas=C:\TesteExtradigital\SISTEMA\Formularios\frmPadraoCad.pas</Transaction>
+    <Transaction>2020/08/22 09:45:58.424,=C:\TesteExtradigital\SISTEMA\Unit1.pas</Transaction>
+    <Transaction>2020/08/22 09:46:16.246,C:\TesteExtradigital\SISTEMA\Formularios\ufrmPessoas.pas=C:\TesteExtradigital\SISTEMA\Unit1.pas</Transaction>
+    <Transaction>2020/08/22 09:46:16.246,C:\TesteExtradigital\SISTEMA\Formularios\ufrmPessoas.dfm=C:\TesteExtradigital\SISTEMA\Unit1.dfm</Transaction>
+    <Transaction>2020/08/22 09:49:26.019,=C:\TesteExtradigital\SISTEMA\Unit1.pas</Transaction>
+    <Transaction>2020/08/22 09:49:49.025,C:\TesteExtradigital\SISTEMA\Formularios\ufrmEmpresas.pas=C:\TesteExtradigital\SISTEMA\Unit1.pas</Transaction>
+    <Transaction>2020/08/22 09:49:49.025,C:\TesteExtradigital\SISTEMA\Formularios\ufrmEmpresas.dfm=C:\TesteExtradigital\SISTEMA\Unit1.dfm</Transaction>
+    <Transaction>2020/08/22 10:05:15.338,=C:\TesteExtradigital\SISTEMA\Unit1.pas</Transaction>
+    <Transaction>2020/08/22 10:09:21.345,C:\TesteExtradigital\SISTEMA\Classes\uFuncoes.pas=C:\TesteExtradigital\SISTEMA\Unit1.pas</Transaction>
+    <Transaction>2020/08/22 10:36:52.338,=C:\TesteExtradigital\SISTEMA\Unit1.pas</Transaction>
+    <Transaction>2020/08/22 10:39:28.896,C:\TesteExtradigital\SISTEMA\DataModules\udmPrincipal.dfm=C:\TesteExtradigital\SISTEMA\Unit1.dfm</Transaction>
+    <Transaction>2020/08/22 10:39:28.896,C:\TesteExtradigital\SISTEMA\DataModules\udmPrincipal.pas=C:\TesteExtradigital\SISTEMA\Unit1.pas</Transaction>
+    <Transaction>2020/08/22 10:40:21.089,=C:\TesteExtradigital\SISTEMA\Unit1.pas</Transaction>
+    <Transaction>2020/08/22 10:40:38.581,C:\TesteExtradigital\SISTEMA\udmPessoas.pas=C:\TesteExtradigital\SISTEMA\Unit1.pas</Transaction>
+    <Transaction>2020/08/22 10:40:38.581,C:\TesteExtradigital\SISTEMA\udmPessoas.dfm=C:\TesteExtradigital\SISTEMA\Unit1.dfm</Transaction>
+    <Transaction>2020/08/22 11:14:16.379,=C:\TesteExtradigital\SISTEMA\Unit1.pas</Transaction>
+    <Transaction>2020/08/22 11:14:30.095,C:\TesteExtradigital\SISTEMA\Classes\uFuncoesDB.pas=C:\TesteExtradigital\SISTEMA\Unit1.pas</Transaction>
+  </Transactions>
+	<ActiveMobileDevice>
+		<NoProfile iOSSimulator="iPhone5"/>
+	</ActiveMobileDevice>
+</BorlandProject>
