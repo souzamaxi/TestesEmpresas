@@ -37,6 +37,7 @@ object frmPadraoCad: TfrmPadraoCad
       Height = 34
       Caption = '&Novo'
       TabOrder = 0
+      TabStop = False
       OnClick = btnNovoClick
     end
     object btnSalvar: TButton
@@ -46,6 +47,7 @@ object frmPadraoCad: TfrmPadraoCad
       Height = 34
       Caption = 'Salvar'
       TabOrder = 1
+      TabStop = False
       OnClick = btnSalvarClick
     end
     object btnExcluir: TButton
@@ -55,6 +57,7 @@ object frmPadraoCad: TfrmPadraoCad
       Height = 34
       Caption = 'Excluir'
       TabOrder = 2
+      TabStop = False
     end
     object btnFechar: TButton
       Left = 423
@@ -85,7 +88,6 @@ object frmPadraoCad: TfrmPadraoCad
     TabOrder = 1
     object tabPesquisar: TTabSheet
       Caption = 'Pesquisar'
-      ExplicitLeft = 8
       object Panel1: TPanel
         Left = 0
         Top = 0
@@ -93,7 +95,6 @@ object frmPadraoCad: TfrmPadraoCad
         Height = 41
         Align = alTop
         TabOrder = 0
-        ExplicitTop = -6
         object Label1: TLabel
           Left = 8
           Top = 0
@@ -123,6 +124,7 @@ object frmPadraoCad: TfrmPadraoCad
         Width = 497
         Height = 175
         Align = alClient
+        Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
         TabOrder = 1
         TitleFont.Charset = DEFAULT_CHARSET
         TitleFont.Color = clWindowText
@@ -134,7 +136,6 @@ object frmPadraoCad: TfrmPadraoCad
     object tabDados: TTabSheet
       Caption = 'Dados'
       ImageIndex = 1
-      ExplicitLeft = 8
     end
   end
   object dsPrincipal: TDataSource

@@ -57,8 +57,55 @@ type
     cdsPqPessoasNMTITULAR: TStringField;
     cdsPqPessoasNOCNPJCPF: TStringField;
     cdsPqPessoasSTATIVO: TStringField;
+    cdsPqPessoasNMEMPRESA: TStringField;
+    sqlDetEndereco: TSQLDataSet;
+    sqlCadEndereco: TSQLDataSet;
+    dspDetEndereco: TDataSetProvider;
+    dspCadEndereco: TDataSetProvider;
+    cdsDetEndereco: TClientDataSet;
+    cdsCadEndereco: TClientDataSet;
+    cdsCadEnderecoIDENDERECO: TIntegerField;
+    cdsCadEnderecoIDTITULAR: TIntegerField;
+    cdsCadEnderecoNMENDERECO: TStringField;
+    cdsCadEnderecoNOENDERECO: TStringField;
+    cdsCadEnderecoNMBAIRRO: TStringField;
+    cdsCadEnderecoIDCIDADE: TIntegerField;
+    cdsCadEnderecoIDUF: TIntegerField;
+    cdsCadEnderecoNOCEP: TStringField;
+    cdsCadEnderecoSTATIVO: TStringField;
+    cdsDetEnderecoNMENDERECO: TStringField;
+    cdsDetEnderecoNOENDERECO: TStringField;
+    cdsDetEnderecoNOCEP: TStringField;
+    cdsDetEnderecoNMCIDADE: TStringField;
+    cdsDetEnderecoSGESTADO: TStringField;
+    sqlCadEnderecoIDENDERECO: TIntegerField;
+    sqlCadEnderecoIDTITULAR: TIntegerField;
+    sqlCadEnderecoNMENDERECO: TStringField;
+    sqlCadEnderecoNOENDERECO: TStringField;
+    sqlCadEnderecoNMBAIRRO: TStringField;
+    sqlCadEnderecoIDCIDADE: TIntegerField;
+    sqlCadEnderecoIDUF: TIntegerField;
+    sqlCadEnderecoNOCEP: TStringField;
+    sqlCadEnderecoSTATIVO: TStringField;
+    cdsDetEnderecoIDENDERECO: TIntegerField;
+    dspComboCidade: TDataSetProvider;
+    dspComboUF: TDataSetProvider;
+    cdsComboCidade: TClientDataSet;
+    cdsComboUF: TClientDataSet;
+    sqlComboCidade: TSQLDataSet;
+    sqlComboUF: TSQLDataSet;
+    cdsComboCidadeIDCIDADE: TIntegerField;
+    cdsComboCidadeNMCIDADE: TStringField;
+    cdsComboCidadeIDUF: TIntegerField;
+    cdsComboCidadeNOIBGE: TStringField;
+    cdsComboUFIDUF: TIntegerField;
+    cdsComboUFNMESTADO: TStringField;
+    cdsComboUFSGESTADO: TStringField;
     procedure cdsCadPessoaAfterOpen(DataSet: TDataSet);
     procedure cdsCadPessoaAfterPost(DataSet: TDataSet);
+    procedure cdsPqPessoasSTATIVOGetText(Sender: TField; var Text: string;
+      DisplayText: Boolean);
+    procedure cdsCadEnderecoAfterOpen(DataSet: TDataSet);
   private
     { Private declarations }
   public
@@ -77,10 +124,26 @@ uses
 
 {$R *.dfm}
 
+procedure TdmPessoas.cdsCadEnderecoAfterOpen(DataSet: TDataSet);
+begin
+  cdsComboCidade.Close;
+  cdsComboCidade.Open;
+
+  cdsComboUF.Close;
+  cdsComboUF.Open;
+end;
+
 procedure TdmPessoas.cdsCadPessoaAfterOpen(DataSet: TDataSet);
 begin
+  cdsCadEndereco.Close;
+
   cdsComboEmpresa.Close;
   cdsComboEmpresa.Open;
+
+  cdsDetEndereco.Close;
+  cdsDetEndereco.Params.ParamByName('IDTITULAR').AsInteger :=
+    cdsCadPessoa.FieldByName('IDTITULAR').AsInteger;
+  cdsDetEndereco.Open;
 end;
 
 procedure TdmPessoas.cdsCadPessoaAfterPost(DataSet: TDataSet);
@@ -90,6 +153,15 @@ begin
     cdsCadPessoa.Edit;
     cdsCadPessoa.FieldByName('IDTITULAR').AsInteger := PegarCodigoAutoIncrement('CADTITULAR');
   end;
+end;
+
+procedure TdmPessoas.cdsPqPessoasSTATIVOGetText(Sender: TField;
+  var Text: string; DisplayText: Boolean);
+begin
+  if (Sender as TStringField).Value = 'S' then
+    Text := 'SIM'
+  else
+    Text := 'NAO'
 end;
 
 end.
