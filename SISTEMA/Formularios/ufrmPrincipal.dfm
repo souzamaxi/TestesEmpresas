@@ -15,6 +15,7 @@ object frmPrincipal: TfrmPrincipal
   OldCreateOrder = False
   Visible = True
   WindowState = wsMaximized
+  OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 13
   object MainMenu1: TMainMenu
@@ -28,12 +29,14 @@ object frmPrincipal: TfrmPrincipal
       end
       object N2: TMenuItem
         Caption = '&Empresas'
+        OnClick = N2Click
       end
       object N3: TMenuItem
         Caption = '-'
       end
       object C2: TMenuItem
-        Caption = 'C&onsultas Pessoas'
+        Caption = '&Funcion'#225'rio'
+        OnClick = C2Click
       end
     end
   end

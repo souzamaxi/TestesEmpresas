@@ -1,0 +1,463 @@
+object dmEmpresas: TdmEmpresas
+  OldCreateOrder = False
+  Height = 514
+  Width = 730
+  object sqlPqEmpresas: TSQLDataSet
+    CommandText = 
+      'SELECT EMP.IDEMPRESA, EMP.NMEMPRESA, EMP.NOCNPJ, EMP.STATIVO, CI' +
+      'D.NMCIDADE FROM CADEMPRESA EMP'#13#10'INNER JOIN CADCIDADE CID ON (EMP' +
+      '.IDCIDADE = CID.IDCIDADE)'
+    MaxBlobSize = -1
+    Params = <>
+    SQLConnection = dmPrincipal.Conexao
+    Left = 96
+    Top = 24
+  end
+  object sqlCadEmpresas: TSQLDataSet
+    CommandText = 'SELECT * FROM CADEMPRESA EMP WHERE EMP.IDEMPRESA = :IDEMPRESA'
+    MaxBlobSize = -1
+    Params = <
+      item
+        DataType = ftWideString
+        Name = 'IDEMPRESA'
+        ParamType = ptInput
+        Value = '-1'
+      end>
+    SQLConnection = dmPrincipal.Conexao
+    Left = 96
+    Top = 80
+    object sqlCadEmpresasIDEMPRESA: TIntegerField
+      FieldName = 'IDEMPRESA'
+    end
+    object sqlCadEmpresasNMEMPRESA: TStringField
+      FieldName = 'NMEMPRESA'
+      Size = 100
+    end
+    object sqlCadEmpresasNOCNPJ: TStringField
+      FieldName = 'NOCNPJ'
+      Size = 18
+    end
+    object sqlCadEmpresasNOINSCRICAO: TStringField
+      FieldName = 'NOINSCRICAO'
+      Size = 15
+    end
+    object sqlCadEmpresasDTCADASTRO: TDateField
+      FieldName = 'DTCADASTRO'
+    end
+    object sqlCadEmpresasDTABERTURA: TDateField
+      FieldName = 'DTABERTURA'
+    end
+    object sqlCadEmpresasTLCOMERCIAL: TStringField
+      FieldName = 'TLCOMERCIAL'
+      Size = 15
+    end
+    object sqlCadEmpresasTLCELULAR: TStringField
+      FieldName = 'TLCELULAR'
+      Size = 15
+    end
+    object sqlCadEmpresasTXOBS: TIntegerField
+      FieldName = 'TXOBS'
+    end
+    object sqlCadEmpresasSTEXCLUIDO: TStringField
+      FieldName = 'STEXCLUIDO'
+      FixedChar = True
+      Size = 1
+    end
+    object sqlCadEmpresasDTEXCLUIDO: TDateField
+      FieldName = 'DTEXCLUIDO'
+    end
+    object sqlCadEmpresasTXEMAIL: TStringField
+      FieldName = 'TXEMAIL'
+      Size = 100
+    end
+    object sqlCadEmpresasSTATIVO: TStringField
+      FieldName = 'STATIVO'
+      FixedChar = True
+      Size = 1
+    end
+  end
+  object dspPqEmpresas: TDataSetProvider
+    DataSet = sqlPqEmpresas
+    Options = [poAllowCommandText, poUseQuoteChar]
+    Left = 232
+    Top = 24
+  end
+  object dspCadEmpresas: TDataSetProvider
+    DataSet = sqlCadEmpresas
+    Options = [poAllowCommandText, poUseQuoteChar]
+    Left = 232
+    Top = 80
+  end
+  object cdsPqEmpresas: TClientDataSet
+    Aggregates = <>
+    CommandText = 
+      'SELECT EMP.IDEMPRESA, EMP.NMEMPRESA, EMP.NOCNPJ, EMP.STATIVO FRO' +
+      'M CADEMPRESA EMP'
+    Params = <>
+    ProviderName = 'dspPqEmpresas'
+    Left = 368
+    Top = 24
+    object cdsPqEmpresasIDEMPRESA: TIntegerField
+      FieldName = 'IDEMPRESA'
+      Required = True
+    end
+    object cdsPqEmpresasNMEMPRESA: TStringField
+      FieldName = 'NMEMPRESA'
+      Size = 100
+    end
+    object cdsPqEmpresasNOCNPJ: TStringField
+      FieldName = 'NOCNPJ'
+      Size = 18
+    end
+    object cdsPqEmpresasSTATIVO: TStringField
+      FieldName = 'STATIVO'
+      OnGetText = cdsPqEmpresasSTATIVOGetText
+      FixedChar = True
+      Size = 1
+    end
+  end
+  object cdsCadEmpresas: TClientDataSet
+    Aggregates = <>
+    CommandText = 'SELECT * FROM CADEMPRESA EMP WHERE EMP.IDEMPRESA = :IDEMPRESA'
+    Params = <
+      item
+        DataType = ftWideString
+        Name = 'IDEMPRESA'
+        ParamType = ptUnknown
+        Value = '-1'
+      end>
+    ProviderName = 'dspCadEmpresas'
+    AfterOpen = cdsCadEmpresasAfterOpen
+    Left = 368
+    Top = 80
+    object cdsCadEmpresasIDEMPRESA: TIntegerField
+      FieldName = 'IDEMPRESA'
+    end
+    object cdsCadEmpresasNMEMPRESA: TStringField
+      FieldName = 'NMEMPRESA'
+      Size = 100
+    end
+    object cdsCadEmpresasNOCNPJ: TStringField
+      FieldName = 'NOCNPJ'
+      OnGetText = cdsCadEmpresasNOCNPJGetText
+      Size = 18
+    end
+    object cdsCadEmpresasNOINSCRICAO: TStringField
+      FieldName = 'NOINSCRICAO'
+      Size = 15
+    end
+    object cdsCadEmpresasDTCADASTRO: TDateField
+      FieldName = 'DTCADASTRO'
+    end
+    object cdsCadEmpresasDTABERTURA: TDateField
+      FieldName = 'DTABERTURA'
+    end
+    object cdsCadEmpresasTLCOMERCIAL: TStringField
+      FieldName = 'TLCOMERCIAL'
+      OnGetText = cdsCadEmpresasTLCOMERCIALGetText
+      Size = 15
+    end
+    object cdsCadEmpresasTLCELULAR: TStringField
+      FieldName = 'TLCELULAR'
+      OnGetText = cdsCadEmpresasTLCELULARGetText
+      Size = 15
+    end
+    object cdsCadEmpresasTXOBS: TIntegerField
+      FieldName = 'TXOBS'
+    end
+    object cdsCadEmpresasSTEXCLUIDO: TStringField
+      FieldName = 'STEXCLUIDO'
+      FixedChar = True
+      Size = 1
+    end
+    object cdsCadEmpresasDTEXCLUIDO: TDateField
+      FieldName = 'DTEXCLUIDO'
+    end
+    object cdsCadEmpresasTXEMAIL: TStringField
+      FieldName = 'TXEMAIL'
+      Size = 100
+    end
+    object cdsCadEmpresasSTATIVO: TStringField
+      FieldName = 'STATIVO'
+      FixedChar = True
+      Size = 1
+    end
+  end
+  object dspComboCidade: TDataSetProvider
+    DataSet = sqlComboCidade
+    Options = [poAllowCommandText, poUseQuoteChar]
+    Left = 232
+    Top = 136
+  end
+  object dspComboUF: TDataSetProvider
+    DataSet = sqlComboUF
+    Options = [poAllowCommandText, poUseQuoteChar]
+    Left = 232
+    Top = 192
+  end
+  object cdsComboCidade: TClientDataSet
+    Aggregates = <>
+    CommandText = 'SELECT * FROM CADCIDADE CID ORDER BY CID.NMCIDADE'
+    Params = <>
+    ProviderName = 'dspComboCidade'
+    Left = 368
+    Top = 136
+    object cdsComboCidadeIDCIDADE: TIntegerField
+      FieldName = 'IDCIDADE'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
+      Required = True
+    end
+    object cdsComboCidadeNMCIDADE: TStringField
+      FieldName = 'NMCIDADE'
+      Size = 100
+    end
+    object cdsComboCidadeIDUF: TIntegerField
+      FieldName = 'IDUF'
+      Required = True
+    end
+    object cdsComboCidadeNOIBGE: TStringField
+      FieldName = 'NOIBGE'
+      Size = 7
+    end
+  end
+  object cdsComboUF: TClientDataSet
+    Aggregates = <>
+    CommandText = 'SELECT * FROM CADUF EST ORDER BY EST.SGESTADO'
+    Params = <>
+    ProviderName = 'dspComboUF'
+    Left = 368
+    Top = 192
+    object cdsComboUFIDUF: TIntegerField
+      FieldName = 'IDUF'
+      Required = True
+    end
+    object cdsComboUFNMESTADO: TStringField
+      FieldName = 'NMESTADO'
+      Size = 50
+    end
+    object cdsComboUFSGESTADO: TStringField
+      FieldName = 'SGESTADO'
+      FixedChar = True
+      Size = 3
+    end
+  end
+  object sqlComboCidade: TSQLDataSet
+    CommandText = 'SELECT * FROM CADCIDADE CID ORDER BY CID.NMCIDADE'
+    MaxBlobSize = -1
+    Params = <>
+    SQLConnection = dmPrincipal.Conexao
+    Left = 96
+    Top = 136
+  end
+  object sqlComboUF: TSQLDataSet
+    CommandText = 'SELECT * FROM CADUF EST ORDER BY EST.SGESTADO'
+    MaxBlobSize = -1
+    Params = <>
+    SQLConnection = dmPrincipal.Conexao
+    Left = 96
+    Top = 192
+  end
+  object sqlDetEndereco: TSQLDataSet
+    CommandText = 
+      'SELECT ENDE.IDENDERECO, ENDE.NMENDERECO, ENDE.NOENDERECO, ENDE.N' +
+      'OCEP, CID.NMCIDADE, UF.SGESTADO FROM CADENDERECOS ENDE'#13#10'LEFT JOI' +
+      'N CADCIDADE CID ON (ENDE.IDCIDADE = CID.IDCIDADE)'#13#10'LEFT JOIN CAD' +
+      'UF UF ON (ENDE.IDUF = UF.IDUF)'#13#10'WHERE ENDE.IDEMPRESA = :IDEMPRES' +
+      'A AND (ENDE.STEXCLUIDO = '#39'N'#39' OR ENDE.STEXCLUIDO IS NULL) AND END' +
+      'E.TPCADASTRO = '#39'P'#39
+    MaxBlobSize = -1
+    Params = <
+      item
+        DataType = ftUnknown
+        Name = 'IDEMPRESA'
+        ParamType = ptInput
+      end>
+    SQLConnection = dmPrincipal.Conexao
+    Left = 96
+    Top = 248
+  end
+  object sqlCadEndereco: TSQLDataSet
+    CommandText = 'SELECT * FROM CADENDERECOS WHERE IDENDERECO = :IDENDERECO'
+    MaxBlobSize = -1
+    Params = <
+      item
+        DataType = ftWideString
+        Name = 'IDENDERECO'
+        ParamType = ptInput
+        Value = '-1'
+      end>
+    SQLConnection = dmPrincipal.Conexao
+    Left = 96
+    Top = 304
+    object sqlCadEnderecoIDENDERECO: TIntegerField
+      FieldName = 'IDENDERECO'
+    end
+    object sqlCadEnderecoIDTITULAR: TIntegerField
+      FieldName = 'IDTITULAR'
+    end
+    object sqlCadEnderecoNMENDERECO: TStringField
+      FieldName = 'NMENDERECO'
+      Size = 100
+    end
+    object sqlCadEnderecoNOENDERECO: TStringField
+      FieldName = 'NOENDERECO'
+      Size = 10
+    end
+    object sqlCadEnderecoNMBAIRRO: TStringField
+      FieldName = 'NMBAIRRO'
+      Size = 50
+    end
+    object sqlCadEnderecoIDCIDADE: TIntegerField
+      FieldName = 'IDCIDADE'
+    end
+    object sqlCadEnderecoIDUF: TIntegerField
+      FieldName = 'IDUF'
+    end
+    object sqlCadEnderecoNOCEP: TStringField
+      FieldName = 'NOCEP'
+      Size = 10
+    end
+    object sqlCadEnderecoSTATIVO: TStringField
+      FieldName = 'STATIVO'
+      FixedChar = True
+      Size = 1
+    end
+    object sqlCadEnderecoSTEXCLUIDO: TStringField
+      FieldName = 'STEXCLUIDO'
+      FixedChar = True
+      Size = 1
+    end
+    object sqlCadEnderecoDTEXCLUIDO: TDateField
+      FieldName = 'DTEXCLUIDO'
+    end
+    object sqlCadEnderecoTPCADASTRO: TStringField
+      FieldName = 'TPCADASTRO'
+      FixedChar = True
+      Size = 1
+    end
+    object sqlCadEnderecoIDEMPRESA: TIntegerField
+      FieldName = 'IDEMPRESA'
+    end
+  end
+  object dspDetEndereco: TDataSetProvider
+    DataSet = sqlDetEndereco
+    Options = [poAllowCommandText, poUseQuoteChar]
+    Left = 232
+    Top = 248
+  end
+  object dspCadEndereco: TDataSetProvider
+    DataSet = sqlCadEndereco
+    Options = [poAllowCommandText, poUseQuoteChar]
+    Left = 232
+    Top = 304
+  end
+  object cdsDetEndereco: TClientDataSet
+    Aggregates = <>
+    CommandText = 
+      'SELECT ENDE.IDENDERECO, ENDE.NMENDERECO, ENDE.NOENDERECO, ENDE.N' +
+      'OCEP, CID.NMCIDADE, UF.SGESTADO FROM CADENDERECOS ENDE'#13#10'LEFT JOI' +
+      'N CADCIDADE CID ON (ENDE.IDCIDADE = CID.IDCIDADE)'#13#10'LEFT JOIN CAD' +
+      'UF UF ON (ENDE.IDUF = UF.IDUF)'#13#10'WHERE ENDE.IDEMPRESA = :IDEMPRES' +
+      'A AND (ENDE.STEXCLUIDO = '#39'N'#39' OR ENDE.STEXCLUIDO IS NULL) AND END' +
+      'E.TPCADASTRO = '#39'E'#39
+    Params = <
+      item
+        DataType = ftUnknown
+        Name = 'IDEMPRESA'
+        ParamType = ptUnknown
+      end>
+    ProviderName = 'dspDetEndereco'
+    Left = 368
+    Top = 248
+    object cdsDetEnderecoNMENDERECO: TStringField
+      FieldName = 'NMENDERECO'
+      Size = 100
+    end
+    object cdsDetEnderecoNOENDERECO: TStringField
+      FieldName = 'NOENDERECO'
+      Size = 10
+    end
+    object cdsDetEnderecoNOCEP: TStringField
+      FieldName = 'NOCEP'
+      Size = 10
+    end
+    object cdsDetEnderecoNMCIDADE: TStringField
+      FieldName = 'NMCIDADE'
+      Size = 100
+    end
+    object cdsDetEnderecoSGESTADO: TStringField
+      FieldName = 'SGESTADO'
+      FixedChar = True
+      Size = 3
+    end
+    object cdsDetEnderecoIDENDERECO: TIntegerField
+      FieldName = 'IDENDERECO'
+      Required = True
+    end
+  end
+  object cdsCadEndereco: TClientDataSet
+    Aggregates = <>
+    CommandText = 'SELECT * FROM CADENDERECOS WHERE IDENDERECO = :IDENDERECO'
+    Params = <
+      item
+        DataType = ftWideString
+        Name = 'IDENDERECO'
+        ParamType = ptUnknown
+        Value = '-1'
+      end>
+    ProviderName = 'dspCadEndereco'
+    AfterOpen = cdsCadEnderecoAfterOpen
+    Left = 368
+    Top = 304
+    object cdsCadEnderecoIDENDERECO: TIntegerField
+      FieldName = 'IDENDERECO'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
+    end
+    object cdsCadEnderecoIDTITULAR: TIntegerField
+      FieldName = 'IDTITULAR'
+    end
+    object cdsCadEnderecoNMENDERECO: TStringField
+      FieldName = 'NMENDERECO'
+      Size = 100
+    end
+    object cdsCadEnderecoNOENDERECO: TStringField
+      FieldName = 'NOENDERECO'
+      Size = 10
+    end
+    object cdsCadEnderecoNMBAIRRO: TStringField
+      FieldName = 'NMBAIRRO'
+      Size = 50
+    end
+    object cdsCadEnderecoIDCIDADE: TIntegerField
+      FieldName = 'IDCIDADE'
+    end
+    object cdsCadEnderecoIDUF: TIntegerField
+      FieldName = 'IDUF'
+    end
+    object cdsCadEnderecoNOCEP: TStringField
+      FieldName = 'NOCEP'
+      Size = 10
+    end
+    object cdsCadEnderecoSTATIVO: TStringField
+      FieldName = 'STATIVO'
+      FixedChar = True
+      Size = 1
+    end
+    object cdsCadEnderecoSTEXCLUIDO: TStringField
+      FieldName = 'STEXCLUIDO'
+      FixedChar = True
+      Size = 1
+    end
+    object cdsCadEnderecoDTEXCLUIDO: TDateField
+      FieldName = 'DTEXCLUIDO'
+    end
+    object cdsCadEnderecoTPCADASTRO: TStringField
+      FieldName = 'TPCADASTRO'
+      FixedChar = True
+      Size = 1
+    end
+    object cdsCadEnderecoIDEMPRESA: TIntegerField
+      FieldName = 'IDEMPRESA'
+    end
+  end
+end

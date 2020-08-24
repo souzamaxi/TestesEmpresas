@@ -1,0 +1,224 @@
+unit udmPessoas;
+
+interface
+
+uses
+  System.SysUtils, System.Classes, Data.FMTBcd, Datasnap.DBClient,
+  Datasnap.Provider, Data.DB, Data.SqlExpr;
+
+type
+  TdmPessoas = class(TDataModule)
+    sqlPqPessoas: TSQLDataSet;
+    dspPqPessoas: TDataSetProvider;
+    cdsPqPessoas: TClientDataSet;
+    dspCadPessoa: TDataSetProvider;
+    cdsCadPessoa: TClientDataSet;
+    sqlCadPessoa: TSQLDataSet;
+    cdsCadPessoaIDTITULAR: TIntegerField;
+    cdsCadPessoaIDEMPRESA: TIntegerField;
+    cdsCadPessoaNMTITULAR: TStringField;
+    cdsCadPessoaNOCNPJCPF: TStringField;
+    cdsCadPessoaNOINCRICAORG: TStringField;
+    cdsCadPessoaDTNASCIMENTO: TDateField;
+    cdsCadPessoaDTCADASTRO: TDateField;
+    cdsCadPessoaTXEMAIL: TStringField;
+    cdsCadPessoaTXOBS: TStringField;
+    cdsCadPessoaTLRESIDENCIAL: TStringField;
+    cdsCadPessoaTLCOMERCIAL: TStringField;
+    cdsCadPessoaTLCELULAR: TStringField;
+    cdsCadPessoaTLCONTATO: TStringField;
+    cdsCadPessoaNMCONTATO: TStringField;
+    cdsCadPessoaSTEXCLUIDO: TStringField;
+    cdsCadPessoaDTEXCLUIDO: TDateField;
+    cdsCadPessoaSTATIVO: TStringField;
+    dspComboEmpresa: TDataSetProvider;
+    cdsComboEmpresa: TClientDataSet;
+    sqlComboEmpresa: TSQLDataSet;
+    cdsComboEmpresaIDEMPRESA: TIntegerField;
+    cdsComboEmpresaNMEMPRESA: TStringField;
+    sqlCadPessoaIDTITULAR: TIntegerField;
+    sqlCadPessoaIDEMPRESA: TIntegerField;
+    sqlCadPessoaNMTITULAR: TStringField;
+    sqlCadPessoaNOCNPJCPF: TStringField;
+    sqlCadPessoaNOINCRICAORG: TStringField;
+    sqlCadPessoaDTNASCIMENTO: TDateField;
+    sqlCadPessoaDTCADASTRO: TDateField;
+    sqlCadPessoaTXEMAIL: TStringField;
+    sqlCadPessoaTXOBS: TStringField;
+    sqlCadPessoaTLRESIDENCIAL: TStringField;
+    sqlCadPessoaTLCOMERCIAL: TStringField;
+    sqlCadPessoaTLCELULAR: TStringField;
+    sqlCadPessoaTLCONTATO: TStringField;
+    sqlCadPessoaNMCONTATO: TStringField;
+    sqlCadPessoaSTEXCLUIDO: TStringField;
+    sqlCadPessoaDTEXCLUIDO: TDateField;
+    sqlCadPessoaSTATIVO: TStringField;
+    cdsPqPessoasIDTITULAR: TIntegerField;
+    cdsPqPessoasNMTITULAR: TStringField;
+    cdsPqPessoasNOCNPJCPF: TStringField;
+    cdsPqPessoasSTATIVO: TStringField;
+    cdsPqPessoasNMEMPRESA: TStringField;
+    sqlDetEndereco: TSQLDataSet;
+    sqlCadEndereco: TSQLDataSet;
+    dspDetEndereco: TDataSetProvider;
+    dspCadEndereco: TDataSetProvider;
+    cdsDetEndereco: TClientDataSet;
+    cdsCadEnderecoPessoa: TClientDataSet;
+    cdsCadEnderecoPessoaIDENDERECO: TIntegerField;
+    cdsCadEnderecoPessoaIDTITULAR: TIntegerField;
+    cdsCadEnderecoPessoaNMENDERECO: TStringField;
+    cdsCadEnderecoPessoaNOENDERECO: TStringField;
+    cdsCadEnderecoPessoaNMBAIRRO: TStringField;
+    cdsCadEnderecoPessoaIDCIDADE: TIntegerField;
+    cdsCadEnderecoPessoaIDUF: TIntegerField;
+    cdsCadEnderecoPessoaNOCEP: TStringField;
+    cdsCadEnderecoPessoaSTATIVO: TStringField;
+    cdsDetEnderecoNMENDERECO: TStringField;
+    cdsDetEnderecoNOENDERECO: TStringField;
+    cdsDetEnderecoNOCEP: TStringField;
+    cdsDetEnderecoNMCIDADE: TStringField;
+    cdsDetEnderecoSGESTADO: TStringField;
+    sqlCadEnderecoIDENDERECO: TIntegerField;
+    sqlCadEnderecoIDTITULAR: TIntegerField;
+    sqlCadEnderecoNMENDERECO: TStringField;
+    sqlCadEnderecoNOENDERECO: TStringField;
+    sqlCadEnderecoNMBAIRRO: TStringField;
+    sqlCadEnderecoIDCIDADE: TIntegerField;
+    sqlCadEnderecoIDUF: TIntegerField;
+    sqlCadEnderecoNOCEP: TStringField;
+    sqlCadEnderecoSTATIVO: TStringField;
+    cdsDetEnderecoIDENDERECO: TIntegerField;
+    dspComboCidade: TDataSetProvider;
+    dspComboUF: TDataSetProvider;
+    cdsComboCidade: TClientDataSet;
+    cdsComboUF: TClientDataSet;
+    sqlComboCidade: TSQLDataSet;
+    sqlComboUF: TSQLDataSet;
+    cdsComboCidadeIDCIDADE: TIntegerField;
+    cdsComboCidadeNMCIDADE: TStringField;
+    cdsComboCidadeIDUF: TIntegerField;
+    cdsComboCidadeNOIBGE: TStringField;
+    cdsComboUFIDUF: TIntegerField;
+    cdsComboUFNMESTADO: TStringField;
+    cdsComboUFSGESTADO: TStringField;
+    sqlCadEnderecoSTEXCLUIDO: TStringField;
+    sqlCadEnderecoDTEXCLUIDO: TDateField;
+    sqlCadEnderecoTPCADASTRO: TStringField;
+    cdsCadEnderecoPessoaSTEXCLUIDO: TStringField;
+    cdsCadEnderecoPessoaDTEXCLUIDO: TDateField;
+    cdsCadEnderecoPessoaTPCADASTRO: TStringField;
+    sqlCadEnderecoIDEMPRESA: TIntegerField;
+    cdsCadEnderecoPessoaIDEMPRESA: TIntegerField;
+    procedure cdsCadPessoaAfterOpen(DataSet: TDataSet);
+    procedure cdsCadPessoaAfterPost(DataSet: TDataSet);
+    procedure cdsPqPessoasSTATIVOGetText(Sender: TField; var Text: string;
+      DisplayText: Boolean);
+    procedure cdsCadEnderecoPessoaAfterOpen(DataSet: TDataSet);
+    procedure cdsCadPessoaNOCNPJCPFGetText(Sender: TField; var Text: string;
+      DisplayText: Boolean);
+    procedure cdsCadPessoaTLRESIDENCIALGetText(Sender: TField; var Text: string;
+      DisplayText: Boolean);
+    procedure cdsCadPessoaTLCOMERCIALGetText(Sender: TField; var Text: string;
+      DisplayText: Boolean);
+    procedure cdsCadPessoaTLCELULARGetText(Sender: TField; var Text: string;
+      DisplayText: Boolean);
+    procedure cdsCadPessoaTLCONTATOGetText(Sender: TField; var Text: string;
+      DisplayText: Boolean);
+    procedure cdsCadPessoaAfterClose(DataSet: TDataSet);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  dmPessoas: TdmPessoas;
+
+implementation
+
+uses
+  udmPrincipal, uFuncoesDB, MaskUtils;
+
+{%CLASSGROUP 'Vcl.Controls.TControl'}
+
+{$R *.dfm}
+
+procedure TdmPessoas.cdsCadEnderecoPessoaAfterOpen(DataSet: TDataSet);
+begin
+  cdsComboCidade.Close;
+  cdsComboCidade.Open;
+
+  cdsComboUF.Close;
+  cdsComboUF.Open;
+end;
+
+procedure TdmPessoas.cdsCadPessoaAfterClose(DataSet: TDataSet);
+begin
+  cdsDetEndereco.Close;
+  cdsCadEnderecoPessoa.Close;
+end;
+
+procedure TdmPessoas.cdsCadPessoaAfterOpen(DataSet: TDataSet);
+begin
+  cdsCadEnderecoPessoa.Close;
+
+  cdsComboEmpresa.Close;
+  cdsComboEmpresa.Open;
+
+  cdsDetEndereco.Close;
+  cdsDetEndereco.Params.ParamByName('IDTITULAR').AsInteger :=
+    cdsCadPessoa.FieldByName('IDTITULAR').AsInteger;
+  cdsDetEndereco.Open;
+end;
+
+procedure TdmPessoas.cdsCadPessoaAfterPost(DataSet: TDataSet);
+begin
+  if cdsCadPessoa.FieldByName('IDTITULAR').AsInteger = 0 then
+  begin
+    cdsCadPessoa.Edit;
+    cdsCadPessoa.FieldByName('IDTITULAR').AsInteger := PegarCodigoAutoIncrement('CADTITULAR');
+  end;
+end;
+
+procedure TdmPessoas.cdsCadPessoaNOCNPJCPFGetText(Sender: TField;
+  var Text: string; DisplayText: Boolean);
+begin
+    Text := MascaraCnpjCpf(Sender, DisplayText);
+end;
+
+procedure TdmPessoas.cdsCadPessoaTLCELULARGetText(Sender: TField;
+  var Text: string; DisplayText: Boolean);
+begin
+  Text := MascaraTelefone(Sender, DisplayText);
+end;
+
+procedure TdmPessoas.cdsCadPessoaTLCOMERCIALGetText(Sender: TField;
+  var Text: string; DisplayText: Boolean);
+begin
+  Text := MascaraTelefone(Sender, DisplayText);
+end;
+
+procedure TdmPessoas.cdsCadPessoaTLCONTATOGetText(Sender: TField;
+  var Text: string; DisplayText: Boolean);
+begin
+  Text := MascaraTelefone(Sender, DisplayText);
+end;
+
+procedure TdmPessoas.cdsCadPessoaTLRESIDENCIALGetText(Sender: TField;
+  var Text: string; DisplayText: Boolean);
+begin
+  Text := MascaraTelefone(Sender, DisplayText);
+end;
+
+procedure TdmPessoas.cdsPqPessoasSTATIVOGetText(Sender: TField;
+  var Text: string; DisplayText: Boolean);
+begin
+  if (Sender as TStringField).Value = 'S' then
+    Text := 'SIM'
+  else if (Sender as TStringField).Value = 'N' then
+    Text := 'NAO'
+  else
+    Text := '';
+end;
+
+end.

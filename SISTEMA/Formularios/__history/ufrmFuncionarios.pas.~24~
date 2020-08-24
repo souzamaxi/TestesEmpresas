@@ -1,0 +1,148 @@
+unit ufrmFuncionarios;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, ufrmPadraoCad, Data.DB, Vcl.Grids,
+  Vcl.DBGrids, Vcl.StdCtrls, Vcl.ComCtrls, Vcl.ExtCtrls, Vcl.DBCtrls, Vcl.Mask,
+  Data.FMTBcd, Data.SqlExpr;
+
+type
+  TfrmFuncionarios = class(TfrmPadraoCad)
+    dsPqFuncionario: TDataSource;
+    DataSource2: TDataSource;
+    DataSource3: TDataSource;
+    Label2: TLabel;
+    Label3: TLabel;
+    Label4: TLabel;
+    Label5: TLabel;
+    Label6: TLabel;
+    Label7: TLabel;
+    Label8: TLabel;
+    Label9: TLabel;
+    Label10: TLabel;
+    Label11: TLabel;
+    Label12: TLabel;
+    Label13: TLabel;
+    Label15: TLabel;
+    dbIDFUNCIONARIO: TDBEdit;
+    DBLookupComboBox1: TDBLookupComboBox;
+    dbNMFUNCIONARIO: TDBEdit;
+    dbNOCPF: TDBEdit;
+    dbNORG: TDBEdit;
+    dbDTNASCIMENTO: TDBEdit;
+    dbDTCADASTRO: TDBEdit;
+    dbTXEMAIL: TDBEdit;
+    dbTXOBS: TDBMemo;
+    dbTLRESIDENCIAL: TDBEdit;
+    dbTLCELULAR: TDBEdit;
+    dbTLCONTATO: TDBEdit;
+    dbNMCONTATO: TDBEdit;
+    GroupBox1: TGroupBox;
+    Label16: TLabel;
+    Label17: TLabel;
+    Label18: TLabel;
+    Label19: TLabel;
+    Label20: TLabel;
+    Label21: TLabel;
+    dbNOCEP: TDBEdit;
+    dbNMENDERECO: TDBEdit;
+    dbNOENDERECO: TDBEdit;
+    dbNMBAIRRO: TDBEdit;
+    dbNMCIDADE: TDBLookupComboBox;
+    dbSGUF: TDBLookupComboBox;
+    dbSTATIVO: TDBCheckBox;
+    Label14: TLabel;
+    DBEdit1: TDBEdit;
+    DBEdit2: TDBEdit;
+    Label22: TLabel;
+    dbNOCARTEIRAMOTORISTA: TDBEdit;
+    Label23: TLabel;
+    procedure btnBuscarClick(Sender: TObject);
+    procedure btnNovoClick(Sender: TObject);
+    procedure btnExcluirClick(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  frmFuncionarios: TfrmFuncionarios;
+
+implementation
+
+uses
+  udmFuncionarios, udmPrincipal;
+
+{$R *.dfm}
+
+procedure TfrmFuncionarios.btnBuscarClick(Sender: TObject);
+var
+  aSQL: TStringList;
+begin
+  inherited;
+  aSQL := TStringList.Create;
+  try
+    aSQL.Clear;
+    aSQL.Add('SELECT FUNC.IDFUNCIONARIO, FUNC.NMFUNCIONARIO, FUNC.NOCPF, FUNC.STATIVO FROM CADFUNCIONARIOS FUNC');
+    if StrToIntDef(edtFiltro.Text, 0) = 0 then
+    begin
+      aSQL.Add('WHERE (UPPER(FUNC.NMFUNCIONARIO) LIKE ''%' + AnsiUpperCase(edtFiltro.Text) + '%'' OR ');
+      aSQL.Add('    FUNC.NOCPF LIKE ''%' + edtFiltro.Text + '%'') ');
+    end
+    else
+    begin
+      aSQL.Add('WHERE FUNC.IDFUNCIONARIO = ' + (edtFiltro.Text));
+    end;
+
+    aSQL.Add('  AND (FUNC.STEXCLUIDO = ''N'' OR FUNC.STEXCLUIDO IS NULL) ');
+
+    dmFuncionarios.cdsPqFuncionario.Close;
+    dmFuncionarios.cdsPqFuncionario.CommandText := aSQL.Text;
+    dmFuncionarios.cdsPqFuncionario.Open;
+  finally
+    FreeAndNil(aSQL);
+  end;
+end;
+
+procedure TfrmFuncionarios.btnExcluirClick(Sender: TObject);
+var
+  oDados: TSQLQuery;
+  aSQL: TStringList;
+begin
+  inherited;
+  if Application.MessageBox('Deseja excluir este funcionário?','Confirmação', MB_YESNO + Mb_IconInformation + MB_DEFBUTTON2) = 6 then
+  begin
+    oDados := TSQLQuery.Create(nil);
+    oDados.SQLConnection := dmPrincipal.Conexao;
+
+    aSQL := TStringList.Create;
+    try
+      aSQL.Clear;
+      aSQL.Add('UPDATE CADFUNCIONARIOS SET STEXCLUIDO = ''S'', ');
+      aSQL.Add('DTEXCLUIDO = ' + QuotedStr(FormatDateTime('yyyy/mm/dd', Now)) );
+      aSQL.Add(' WHERE IDFUNCIONARIO = ' + dmFuncionarios.cdsCadFuncionario.FieldByName('IDFUNCIONARIO').AsString);
+
+      oDados.Close;
+      oDados.CommandText := aSQL.Text;
+      oDados.ExecSQL();
+
+    finally
+      FreeAndNil(oDados);
+      FreeAndNil(aSQL);
+    end;
+    dmFuncionarios.cdsPqFuncionario.Close;
+  end;
+end;
+
+procedure TfrmFuncionarios.btnNovoClick(Sender: TObject);
+begin
+  inherited;
+  dbNMFUNCIONARIO.SetFocus;
+  dmFuncionarios.cdsCadFuncionario.FieldByName('STATIVO').AsString := 'S';
+  dmFuncionarios.cdsCadFuncionario.FieldByName('STEXCLUIDO').AsString := 'N';
+end;
+
+end.

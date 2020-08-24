@@ -24,7 +24,6 @@ inherited frmPessoas: TfrmPessoas
   inherited pcPrincipal: TPageControl
     Width = 769
     Height = 456
-    ActivePage = tabDados
     ExplicitWidth = 769
     ExplicitHeight = 456
     inherited tabPesquisar: TTabSheet
@@ -220,6 +219,7 @@ inherited frmPessoas: TfrmPessoas
         Height = 21
         DataField = 'NOCNPJCPF'
         DataSource = dsPrincipal
+        MaxLength = 14
         TabOrder = 4
       end
       object dbNOINCRICAORG: TDBEdit
@@ -292,7 +292,7 @@ inherited frmPessoas: TfrmPessoas
         Height = 21
         DataField = 'TLCONTATO'
         DataSource = dsPrincipal
-        TabOrder = 11
+        TabOrder = 12
       end
       object dbTLCOMERCIAL: TDBEdit
         Left = 249
@@ -301,7 +301,7 @@ inherited frmPessoas: TfrmPessoas
         Height = 21
         DataField = 'TLCOMERCIAL'
         DataSource = dsPrincipal
-        TabOrder = 12
+        TabOrder = 11
       end
       object dbSTATIVO: TDBCheckBox
         Left = 692
@@ -535,8 +535,6 @@ inherited frmPessoas: TfrmPessoas
           TabOrder = 6
           ValueChecked = 'S'
           ValueUnchecked = 'N'
-          OnClick = dbSTATIVOENDERECOClick
-          OnEnter = dbSTATIVOENDERECOEnter
         end
       end
     end
@@ -562,8 +560,8 @@ inherited frmPessoas: TfrmPessoas
     Top = 376
   end
   object dsCadEndereco: TDataSource
-    DataSet = dmPessoas.cdsCadEndereco
-    OnDataChange = dsCadEnderecoDataChange
+    DataSet = dmPessoas.cdsCadEnderecoPessoa
+    OnStateChange = dsCadEnderecoStateChange
     Left = 208
     Top = 384
   end

@@ -109,10 +109,6 @@
             <Form>frmPadraoCad</Form>
             <FormType>dfm</FormType>
         </DCCReference>
-        <DCCReference Include="Formularios\ufrmPessoas.pas">
-            <Form>frmPessoas</Form>
-            <FormType>dfm</FormType>
-        </DCCReference>
         <DCCReference Include="Formularios\ufrmEmpresas.pas">
             <Form>frmEmpresas</Form>
             <FormType>dfm</FormType>
@@ -123,12 +119,31 @@
             <FormType>dfm</FormType>
             <DesignClass>TDataModule</DesignClass>
         </DCCReference>
-        <DCCReference Include="udmPessoas.pas">
+        <DCCReference Include="Classes\uFuncoesDB.pas"/>
+        <DCCReference Include="DataModules\udmPessoas.pas">
             <Form>dmPessoas</Form>
             <FormType>dfm</FormType>
             <DesignClass>TDataModule</DesignClass>
         </DCCReference>
-        <DCCReference Include="Classes\uFuncoesDB.pas"/>
+        <DCCReference Include="Formularios\ufrmPessoas.pas">
+            <Form>frmPessoas</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="DataModules\udmEmpresas.pas">
+            <Form>dmEmpresas</Form>
+            <FormType>dfm</FormType>
+            <DesignClass>TDataModule</DesignClass>
+        </DCCReference>
+        <DCCReference Include="Formularios\ufrmFuncionarios.pas">
+            <Form>frmFuncionarios</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="DataModules\udmFuncionarios.pas">
+            <Form>dmFuncionarios</Form>
+            <FormType>dfm</FormType>
+            <DesignClass>TDataModule</DesignClass>
+        </DCCReference>
+        <DCCReference Include="Classes\uEnderecos.pas"/>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>

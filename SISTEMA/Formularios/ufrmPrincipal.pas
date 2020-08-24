@@ -4,7 +4,7 @@ interface
 
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
-  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.Menus;
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.Menus, MidasLib;
 
 type
   TfrmPrincipal = class(TForm)
@@ -15,6 +15,9 @@ type
     N3: TMenuItem;
     C2: TMenuItem;
     procedure N1Click(Sender: TObject);
+    procedure N2Click(Sender: TObject);
+    procedure FormShow(Sender: TObject);
+    procedure C2Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -27,13 +30,28 @@ var
 implementation
 
 uses
-  ufrmEmpresas, ufrmPessoas, uFuncoes;
+  ufrmEmpresas, ufrmPessoas, uFuncoes, udmPrincipal, ufrmFuncionarios;
 
 {$R *.dfm}
+
+procedure TfrmPrincipal.C2Click(Sender: TObject);
+begin
+  AbrirFormulario(Self, TfrmFuncionarios, frmFuncionarios);
+end;
+
+procedure TfrmPrincipal.FormShow(Sender: TObject);
+begin
+  //dmPrincipal.Conexao.Open;
+end;
 
 procedure TfrmPrincipal.N1Click(Sender: TObject);
 begin
   AbrirFormulario(Self, TfrmPessoas, frmPessoas);
+end;
+
+procedure TfrmPrincipal.N2Click(Sender: TObject);
+begin
+  AbrirFormulario(Self, TfrmEmpresas, frmEmpresas);
 end;
 
 end.

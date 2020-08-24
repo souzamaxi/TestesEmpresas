@@ -1,0 +1,20 @@
+program ExtraDigital;
+
+uses
+  Vcl.Forms,
+  ufrmPrincipal in 'Formularios\ufrmPrincipal.pas' {frmPrincipal},
+  ufrmPadraoCad in 'Formularios\ufrmPadraoCad.pas' {frmPadraoCad},
+  ufrmEmpresas in 'Formularios\ufrmEmpresas.pas' {frmEmpresas},
+  uFuncoes in 'Classes\uFuncoes.pas',
+  udmPrincipal in 'DataModules\udmPrincipal.pas' {dmPrincipal: TDataModule},
+  uFuncoesDB in 'Classes\uFuncoesDB.pas';
+
+{$R *.res}
+
+begin
+  Application.Initialize;
+  Application.MainFormOnTaskbar := True;
+  Application.CreateForm(TfrmPrincipal, frmPrincipal);
+  Application.CreateForm(TdmPrincipal, dmPrincipal);
+  Application.Run;
+end.

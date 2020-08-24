@@ -69,20 +69,16 @@ type
     procedure btnNovoClick(Sender: TObject);
     procedure grDadosDblClick(Sender: TObject);
     procedure btnNovoEnderecoClick(Sender: TObject);
-    procedure dsCadEnderecoDataChange(Sender: TObject; Field: TField);
     procedure btnSalvarEnderecoClick(Sender: TObject);
     procedure btnExcluirEnderecoClick(Sender: TObject);
     procedure dbSTATIVOENDERECOEnter(Sender: TObject);
     procedure grEnderecosCellClick(Column: TColumn);
     procedure dbSTATIVOENDERECOClick(Sender: TObject);
     procedure btnExcluirClick(Sender: TObject);
+    procedure dsCadEnderecoStateChange(Sender: TObject);
   private
     { Private declarations }
-    procedure AtivarEnderecoPessoa(nCodigo: Integer);
-
     function ValidarCadastroPessoa: Boolean;
-    function VerificarEnderecoAtivo(nCodigo: Integer): Boolean;
-    function VerificarEnderecoSelecionado(nCodigo: Integer): Boolean;
   public
     { Public declarations }
   end;
@@ -93,42 +89,9 @@ var
 implementation
 
 uses
-  udmPessoas, udmPrincipal;
+  udmPrincipal, udmPessoas, uEnderecos;
 
 {$R *.dfm}
-
-procedure TfrmPessoas.AtivarEnderecoPessoa(nCodigo: Integer);
-var
-  oDados: TSQLQuery;
-  aSQL: TStringList;
-begin
-  oDados := TSQLQuery.Create(nil);
-  oDados.SQLConnection := dmPrincipal.Conexao;
-
-  aSQL := TStringList.Create;
-  try
-    oDados.Close;
-    aSQL.Clear;
-    aSQL.Add('UPDATE CADENDERECOS SET STATIVO = ''N'' WHERE IDTITULAR = ' +
-      dmPessoas.cdsCadPessoa.FieldByName('IDTITULAR').AsString);
-    aSQL.Add('    AND IDENDERECO <> ' + nCodigo.ToString);
-
-    oDados.CommandText := aSQL.Text;
-    oDados.ExecSQL();
-
-    oDados.Close;
-    aSQL.Clear;
-    aSQL.Add('UPDATE CADENDERECOS SET STATIVO = ''S'' WHERE IDTITULAR = ' +
-      dmPessoas.cdsCadPessoa.FieldByName('IDTITULAR').AsString);
-    aSQL.Add('    AND IDENDERECO = ' + nCodigo.ToString);
-
-    oDados.CommandText := aSQL.Text;
-    oDados.ExecSQL();
-  finally
-    FreeAndNil(oDados);
-    FreeAndNil(aSQL);
-  end;
-end;
 
 procedure TfrmPessoas.btnBuscarClick(Sender: TObject);
 var
@@ -199,7 +162,7 @@ begin
   inherited;
   if Application.MessageBox('Deseja excluir este endereço?','Confirmação', MB_YESNO + Mb_IconInformation + MB_DEFBUTTON2) = 6 then
   begin
-    if not VerificarEnderecoSelecionado(dmPessoas.cdsCadEndereco.Params.ParamByName('IDENDERECO').AsInteger) then
+    if not VerificarEnderecoSelecionado(dmPessoas.cdsCadEnderecoPessoa.Params.ParamByName('IDENDERECO').AsInteger) then
     begin
       oDados := TSQLQuery.Create(nil);
       oDados.SQLConnection := dmPrincipal.Conexao;
@@ -210,13 +173,13 @@ begin
         aSQL.Add('UPDATE CADENDERECOS SET STEXCLUIDO = ''S'', ');
         aSQL.Add('DTEXCLUIDO = ' + QuotedStr(FormatDateTime('yyyy/mm/dd', Now)) );
         aSQL.Add(' WHERE IDTITULAR = ' + dmPessoas.cdsCadPessoa.FieldByName('IDTITULAR').AsString);
-        aSQL.Add('    AND IDENDERECO = ' + dmPessoas.cdsCadEndereco.Params.ParamByName('IDENDERECO').AsString);
+        aSQL.Add('    AND IDENDERECO = ' + dmPessoas.cdsCadEnderecoPessoa.Params.ParamByName('IDENDERECO').AsString);
 
         oDados.Close;
         oDados.CommandText := aSQL.Text;
         oDados.ExecSQL();
 
-        dmPessoas.cdsCadEndereco.Close;
+        dmPessoas.cdsCadEnderecoPessoa.Close;
         dmPessoas.cdsDetEndereco.Close;
         dmPessoas.cdsDetEndereco.Open;
       finally
@@ -240,16 +203,17 @@ end;
 procedure TfrmPessoas.btnNovoEnderecoClick(Sender: TObject);
 begin
   inherited;
-  dmPessoas.cdsCadEndereco.Open;
-  dmPessoas.cdsCadEndereco.Append;
-  dmPessoas.cdsCadEndereco.FieldByName('IDTITULAR').AsInteger :=
+  dmPessoas.cdsCadEnderecoPessoa.Open;
+  dmPessoas.cdsCadEnderecoPessoa.Append;
+  dmPessoas.cdsCadEnderecoPessoa.FieldByName('IDTITULAR').AsInteger :=
     dmPessoas.cdsCadPessoa.FieldByName('IDTITULAR').AsInteger;
-  dmPessoas.cdsCadEndereco.FieldByName('STEXCLUIDO').AsString := 'N';
+  dmPessoas.cdsCadEnderecoPessoa.FieldByName('STEXCLUIDO').AsString := 'N';
+  dmPessoas.cdsCadEnderecoPessoa.FieldByName('TPCADASTRO').AsString := 'P';
 
   if dmPessoas.cdsDetEndereco.RecordCount > 0 then
-    dmPessoas.cdsCadEndereco.FieldByName('STATIVO').AsString := 'N'
+    dmPessoas.cdsCadEnderecoPessoa.FieldByName('STATIVO').AsString := 'N'
   else
-    dmPessoas.cdsCadEndereco.FieldByName('STATIVO').AsString := 'S';
+    dmPessoas.cdsCadEnderecoPessoa.FieldByName('STATIVO').AsString := 'S';
 
   dbNOCEP.SetFocus;
 end;
@@ -264,8 +228,8 @@ end;
 procedure TfrmPessoas.btnSalvarEnderecoClick(Sender: TObject);
 begin
   inherited;
-  dmPessoas.cdsCadEndereco.Post;
-  dmPessoas.cdsCadEndereco.ApplyUpdates(0);
+  dmPessoas.cdsCadEnderecoPessoa.Post;
+  dmPessoas.cdsCadEnderecoPessoa.ApplyUpdates(0);
 
   dmPessoas.cdsDetEndereco.Close;
   dmPessoas.cdsDetEndereco.Params.ParamByName('IDTITULAR').AsInteger :=
@@ -278,17 +242,17 @@ begin
   inherited;
   if dmPessoas.cdsDetEndereco.RecordCount > 0 then
   begin
-    dmPessoas.cdsCadEndereco.Close;
-    dmPessoas.cdsCadEndereco.Params.ParamByName('IDENDERECO').AsInteger :=
+    dmPessoas.cdsCadEnderecoPessoa.Close;
+    dmPessoas.cdsCadEnderecoPessoa.Params.ParamByName('IDENDERECO').AsInteger :=
       dmPessoas.cdsDetEndereco.FieldByName('IDENDERECO').AsInteger;
-    dmPessoas.cdsCadEndereco.Open;
+    dmPessoas.cdsCadEnderecoPessoa.Open;
   end;
 end;
 
 procedure TfrmPessoas.dbSTATIVOENDERECOClick(Sender: TObject);
 begin
   inherited;
-  if VerificarEnderecoSelecionado(dmPessoas.cdsCadEndereco.Params.ParamByName('IDENDERECO').AsInteger) then
+  if VerificarEnderecoSelecionado(dmPessoas.cdsCadEnderecoPessoa.Params.ParamByName('IDENDERECO').AsInteger) then
     dbSTATIVOENDERECO.Checked := True;
 end;
 
@@ -297,31 +261,25 @@ var
   nCodigo: Integer;
 begin
   inherited;
-  dmPessoas.cdsCadEndereco.Edit;
-  if (not dbSTATIVOENDERECO.Checked) and VerificarEnderecoAtivo(dmPessoas.cdsCadEndereco.FieldByName('IDTITULAR').AsInteger) then
+  dmPessoas.cdsCadEnderecoPessoa.Edit;
+  if (not dbSTATIVOENDERECO.Checked) and VerificarEnderecoAtivo(dmPessoas.cdsCadEnderecoPessoa.FieldByName('IDTITULAR').AsInteger, 'P') then
   begin
     if Application.MessageBox('Já existe outro endereço ativo, deseja remover e ativar este endereço?','Confirmação', MB_YESNO + Mb_IconInformation + MB_DEFBUTTON2) = 6 then
     begin
-      nCodigo := dmPessoas.cdsCadEndereco.FieldByName('IDENDERECO').AsInteger;
+      nCodigo := dmPessoas.cdsCadEnderecoPessoa.FieldByName('IDENDERECO').AsInteger;
       AtivarEnderecoPessoa(nCodigo);
       dbSTATIVOENDERECO.Checked := True;
-      dmPessoas.cdsCadEndereco.FieldByName('STATIVO').AsString := 'S';
+      dmPessoas.cdsCadEnderecoPessoa.FieldByName('STATIVO').AsString := 'S';
     end;
-  end
-  else
-  begin
-    //dmPessoas.cdsCadEndereco.FieldByName('STATIVO').AsString := 'S';
-    //dmPessoas.cdsCadEndereco.Post;
-    //dmPessoas.cdsCadEndereco.ApplyUpdates(0);
   end;
 end;
 
-procedure TfrmPessoas.dsCadEnderecoDataChange(Sender: TObject; Field: TField);
+procedure TfrmPessoas.dsCadEnderecoStateChange(Sender: TObject);
 begin
   inherited;
-  btnNovoEndereco.Enabled := not (dmPessoas.cdsCadEndereco.State in dsEditModes);
-  btnSalvarEndereco.Enabled := (dmPessoas.cdsCadEndereco.State in dsEditModes);
-  btnExcluirEndereco.Enabled := not (dmPessoas.cdsCadEndereco.State in dsEditModes) and (dmPessoas.cdsCadEndereco.RecordCount > 0);
+  btnNovoEndereco.Enabled := not (dmPessoas.cdsCadEnderecoPessoa.State in dsEditModes);
+  btnSalvarEndereco.Enabled := (dmPessoas.cdsCadEnderecoPessoa.State in dsEditModes);
+  btnExcluirEndereco.Enabled := not (dmPessoas.cdsCadEnderecoPessoa.State in dsEditModes) and dmPessoas.cdsCadEnderecoPessoa.Active and (dmPessoas.cdsCadEnderecoPessoa.RecordCount > 0);
 end;
 
 procedure TfrmPessoas.grDadosDblClick(Sender: TObject);
@@ -351,44 +309,6 @@ begin
   end;
 
   Result := ok;
-end;
-
-function TfrmPessoas.VerificarEnderecoAtivo(nCodigo: Integer): Boolean;
-var
-  oDados: TSQLDataSet;
-begin
-  oDados := TSQLDataSet.Create(nil);
-  oDados.SQLConnection := dmPrincipal.Conexao;
-
-  try
-    oDados.Close;
-    oDados.CommandText := 'SELECT STATIVO FROM CADENDERECOS WHERE IDTITULAR = ' + nCodigo.ToString + ' AND STATIVO = ''S''';
-    oDados.Open;
-
-    Result := (oDados.RecordCount > 0);
-
-  finally
-    FreeAndNil(oDados);
-  end;
-end;
-
-function TfrmPessoas.VerificarEnderecoSelecionado(nCodigo: Integer): Boolean;
-var
-  oDados: TSQLDataSet;
-begin
-  oDados := TSQLDataSet.Create(nil);
-  oDados.SQLConnection := dmPrincipal.Conexao;
-
-  try
-    oDados.Close;
-    oDados.CommandText := 'SELECT STATIVO FROM CADENDERECOS WHERE IDENDERECO = ' + nCodigo.ToString + ' AND STATIVO = ''S''';
-    oDados.Open;
-
-    Result := (oDados.RecordCount > 0);
-
-  finally
-    FreeAndNil(oDados);
-  end;
 end;
 
 end.

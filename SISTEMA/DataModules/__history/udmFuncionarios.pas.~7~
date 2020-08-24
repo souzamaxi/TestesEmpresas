@@ -1,0 +1,79 @@
+unit udmFuncionarios;
+
+interface
+
+uses
+  System.SysUtils, System.Classes, Data.FMTBcd, Data.DB, Datasnap.DBClient,
+  Datasnap.Provider, Data.SqlExpr;
+
+type
+  TdmFuncionarios = class(TDataModule)
+    sqlPqFuncionario: TSQLDataSet;
+    sqlCadFuncionario: TSQLDataSet;
+    dspPqFuncionario: TDataSetProvider;
+    dspCadFuncionario: TDataSetProvider;
+    cdsPqFuncionario: TClientDataSet;
+    cdsCadFuncionario: TClientDataSet;
+    dspComboCidade: TDataSetProvider;
+    dspComboUF: TDataSetProvider;
+    cdsComboCidade: TClientDataSet;
+    cdsComboCidadeIDCIDADE: TIntegerField;
+    cdsComboCidadeNMCIDADE: TStringField;
+    cdsComboCidadeIDUF: TIntegerField;
+    cdsComboCidadeNOIBGE: TStringField;
+    cdsComboUF: TClientDataSet;
+    cdsComboUFIDUF: TIntegerField;
+    cdsComboUFNMESTADO: TStringField;
+    cdsComboUFSGESTADO: TStringField;
+    sqlComboCidade: TSQLDataSet;
+    sqlComboUF: TSQLDataSet;
+    cdsCadFuncionarioIDFUNCIONARIO: TIntegerField;
+    cdsCadFuncionarioNMFUNCIONARIO: TStringField;
+    cdsCadFuncionarioNOCPF: TStringField;
+    cdsCadFuncionarioNORG: TStringField;
+    cdsCadFuncionarioDTNASCIMENTO: TDateField;
+    cdsCadFuncionarioTXEMAIL: TStringField;
+    cdsCadFuncionarioNOCARTEIRATRAB: TStringField;
+    cdsCadFuncionarioNOTITULOELEITOR: TStringField;
+    cdsCadFuncionarioNOCARTEIRAMOTORISTA: TStringField;
+    cdsCadFuncionarioDTVALIDADECARTEIRAMOT: TDateField;
+    cdsCadFuncionarioTLRESIDENCIAL: TStringField;
+    cdsCadFuncionarioTLCELULAR: TStringField;
+    cdsCadFuncionarioTLCONTATO: TStringField;
+    cdsCadFuncionarioNMCONTATO: TStringField;
+    cdsCadFuncionarioDTCONTRATACAO: TDateField;
+    cdsCadFuncionarioDTDEMISSAO: TDateField;
+    cdsCadFuncionarioDTCADASTRO: TDateField;
+    cdsCadFuncionarioSTATIVO: TStringField;
+    cdsCadFuncionarioTXOBS: TStringField;
+    cdsCadFuncionarioNMENDERECO: TStringField;
+    cdsCadFuncionarioNOENDERECO: TStringField;
+    cdsCadFuncionarioNMBAIRRO: TStringField;
+    cdsCadFuncionarioIDCIDADE: TIntegerField;
+    cdsCadFuncionarioIDUF: TIntegerField;
+    cdsCadFuncionarioNOCEP: TStringField;
+    cdsCadFuncionarioSTEXCLUIDO: TStringField;
+    cdsCadFuncionarioDTEXCLUIDO: TDateField;
+    cdsPqFuncionarioIDFUNCIONARIO: TIntegerField;
+    cdsPqFuncionarioNMFUNCIONARIO: TStringField;
+    cdsPqFuncionarioNOCPF: TStringField;
+    cdsPqFuncionarioSTATIVO: TStringField;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  dmFuncionarios: TdmFuncionarios;
+
+implementation
+
+uses
+  udmPrincipal;
+
+{%CLASSGROUP 'Vcl.Controls.TControl'}
+
+{$R *.dfm}
+
+end.
