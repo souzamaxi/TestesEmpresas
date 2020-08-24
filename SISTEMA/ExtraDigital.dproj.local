@@ -58,14 +58,14 @@
     <Transaction>2020/08/23 19:47:13.000.264,=C:\TesteExtradigital\SISTEMA\Unit1.pas</Transaction>
     <Transaction>2020/08/23 19:47:41.000.721,C:\TesteExtradigital\SISTEMA\Unit1.dfm=C:\TesteExtradigital\SISTEMA\DataModules\udmEmpresas.dfm</Transaction>
     <Transaction>2020/08/23 19:47:41.000.721,C:\TesteExtradigital\SISTEMA\Unit1.pas=C:\TesteExtradigital\SISTEMA\DataModules\udmEmpresas.pas</Transaction>
-    <Transaction>2020/08/23 21:21:35.778,=C:\TesteExtradigital\SISTEMA\Unit1.pas</Transaction>
-    <Transaction>2020/08/23 21:22:00.587,C:\TesteExtradigital\SISTEMA\Formularios\ufrmFuncionarios.dfm=C:\TesteExtradigital\SISTEMA\Unit1.dfm</Transaction>
-    <Transaction>2020/08/23 21:22:00.587,C:\TesteExtradigital\SISTEMA\Formularios\ufrmFuncionarios.pas=C:\TesteExtradigital\SISTEMA\Unit1.pas</Transaction>
-    <Transaction>2020/08/23 21:27:00.321,=C:\TesteExtradigital\SISTEMA\Unit1.pas</Transaction>
-    <Transaction>2020/08/23 21:27:28.963,C:\TesteExtradigital\SISTEMA\DataModules\udmFuncionarios.dfm=C:\TesteExtradigital\SISTEMA\Unit1.dfm</Transaction>
-    <Transaction>2020/08/23 21:27:28.963,C:\TesteExtradigital\SISTEMA\DataModules\udmFuncionarios.pas=C:\TesteExtradigital\SISTEMA\Unit1.pas</Transaction>
-    <Transaction>2020/08/23 21:47:12.349,=C:\TesteExtradigital\SISTEMA\Unit1.pas</Transaction>
-    <Transaction>2020/08/23 21:47:28.506,C:\TesteExtradigital\SISTEMA\Classes\uEnderecos.pas=C:\TesteExtradigital\SISTEMA\Unit1.pas</Transaction>
+    <Transaction>2020/08/23 21:21:35.000.778,=C:\TesteExtradigital\SISTEMA\Unit1.pas</Transaction>
+    <Transaction>2020/08/23 21:22:00.000.587,C:\TesteExtradigital\SISTEMA\Formularios\ufrmFuncionarios.dfm=C:\TesteExtradigital\SISTEMA\Unit1.dfm</Transaction>
+    <Transaction>2020/08/23 21:22:00.000.587,C:\TesteExtradigital\SISTEMA\Formularios\ufrmFuncionarios.pas=C:\TesteExtradigital\SISTEMA\Unit1.pas</Transaction>
+    <Transaction>2020/08/23 21:27:00.000.321,=C:\TesteExtradigital\SISTEMA\Unit1.pas</Transaction>
+    <Transaction>2020/08/23 21:27:28.000.963,C:\TesteExtradigital\SISTEMA\DataModules\udmFuncionarios.dfm=C:\TesteExtradigital\SISTEMA\Unit1.dfm</Transaction>
+    <Transaction>2020/08/23 21:27:28.000.963,C:\TesteExtradigital\SISTEMA\DataModules\udmFuncionarios.pas=C:\TesteExtradigital\SISTEMA\Unit1.pas</Transaction>
+    <Transaction>2020/08/23 21:47:12.000.349,=C:\TesteExtradigital\SISTEMA\Unit1.pas</Transaction>
+    <Transaction>2020/08/23 21:47:28.000.506,C:\TesteExtradigital\SISTEMA\Classes\uEnderecos.pas=C:\TesteExtradigital\SISTEMA\Unit1.pas</Transaction>
   </Transactions>
 	<ActiveMobileDevice>
 		<NoProfile iOSSimulator="iPhone5"/>

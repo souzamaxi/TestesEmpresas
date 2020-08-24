@@ -3,11 +3,13 @@ unit uFuncoesDB;
 interface
 
 uses
-  Data.DB, Data.SqlExpr, System.SysUtils;
+  Data.DB, Data.SqlExpr, Datasnap.DBClient, System.SysUtils, System.Classes;
 
   function PegarCodigoAutoIncrement(sTabela: string): Integer;
   function MascaraTelefone(Sender: TField; DisplayText: Boolean): string;
   function MascaraCnpjCpf(Sender: TField; DisplayText: Boolean): string;
+
+  function ExportarConsultaCSV(oDados: TClientDataSet; sCaminho: string): Boolean;
 
 implementation
 
@@ -72,6 +74,40 @@ begin
   end
   else
     Result := Sender.AsString;
+end;
+
+function ExportarConsultaCSV(oDados: TClientDataSet; sCaminho: string): Boolean;
+const
+  Delimitador: Char = ';';
+var
+  Stream: TFileStream;
+  i: Integer;
+  OutLine: string;
+  sTemp: string;
+  book: TBookmark;
+begin
+  Stream := TFileStream.Create(sCaminho, fmCreate);
+  try
+    book := oDados.GetBookMark;
+    oDados.DisableControls;
+    while not oDados.Eof do
+    begin
+      OutLine := '';
+      for i := 0 to oDados.FieldCount - 1 do
+      begin
+        sTemp := oDados.Fields[i].AsString;
+        OutLine := OutLine + sTemp + Delimitador;
+      end;
+      SetLength(OutLine, Length(OutLine) - 1);
+      Stream.Write(OutLine[1], Length(OutLine) * SizeOf(Char));
+      Stream.Write(sLineBreak, Length(sLineBreak));
+      oDados.Next;
+    end;
+  finally
+    FreeAndNil(Stream);
+    oDados.GotoBookmark(book);
+    oDados.EnableControls;
+  end;
 end;
 
 end.

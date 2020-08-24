@@ -2,7 +2,6 @@ inherited frmFuncionarios: TfrmFuncionarios
   Caption = 'Cadastro de funcion'#225'rios'
   ClientHeight = 468
   ClientWidth = 771
-  ExplicitTop = -102
   ExplicitWidth = 787
   ExplicitHeight = 507
   PixelsPerInch = 96
@@ -24,32 +23,92 @@ inherited frmFuncionarios: TfrmFuncionarios
   inherited pnMenu: TPanel
     Top = 430
     Width = 771
-    ExplicitTop = 343
-    ExplicitWidth = 726
+    ExplicitTop = 432
+    ExplicitWidth = 771
     inherited btnExcluir: TButton
       OnClick = btnExcluirClick
     end
     inherited btnFechar: TButton
       Left = 689
-      ExplicitLeft = 644
+      ExplicitLeft = 689
     end
   end
   inherited pcPrincipal: TPageControl
     Width = 771
     Height = 430
-    ActivePage = tabDados
-    ExplicitWidth = 726
-    ExplicitHeight = 343
+    ExplicitWidth = 771
+    ExplicitHeight = 430
     inherited tabPesquisar: TTabSheet
       ExplicitLeft = 4
       ExplicitTop = 24
-      ExplicitWidth = 718
-      ExplicitHeight = 315
+      ExplicitWidth = 763
+      ExplicitHeight = 402
       inherited Panel1: TPanel
         Width = 763
-        ExplicitWidth = 718
+        ExplicitWidth = 763
+        object Label30: TLabel [1]
+          Left = 310
+          Top = 0
+          Width = 53
+          Height = 13
+          Caption = 'Data Inicial'
+        end
+        object Label31: TLabel [2]
+          Left = 402
+          Top = 0
+          Width = 48
+          Height = 13
+          Caption = 'Data Final'
+        end
         inherited btnBuscar: TButton
+          Left = 576
+          TabOrder = 3
           OnClick = btnBuscarClick
+          ExplicitLeft = 576
+        end
+        inherited edtFiltro: TEdit
+          Width = 294
+          TabOrder = 0
+          ExplicitWidth = 294
+        end
+        object btnExportar: TButton
+          Left = 679
+          Top = 2
+          Width = 75
+          Height = 34
+          Caption = 'Exportar'
+          TabOrder = 4
+          TabStop = False
+          OnClick = btnExportarClick
+        end
+        object dtpkFinal: TDateTimePicker
+          Left = 402
+          Top = 14
+          Width = 85
+          Height = 21
+          Date = 44067.433353657410000000
+          Time = 44067.433353657410000000
+          TabOrder = 2
+          OnChange = dtpkFinalChange
+        end
+        object dtpkInicial: TDateTimePicker
+          Left = 310
+          Top = 14
+          Width = 85
+          Height = 21
+          Date = 44067.433353657410000000
+          Time = 44067.433353657410000000
+          TabOrder = 1
+          OnChange = dtpkInicialChange
+        end
+        object ckFiltroData: TCheckBox
+          Left = 493
+          Top = 16
+          Width = 70
+          Height = 17
+          TabStop = False
+          Caption = 'Filtro Data'
+          TabOrder = 5
         end
       end
       inherited grDados: TDBGrid
@@ -89,7 +148,7 @@ inherited frmFuncionarios: TfrmFuncionarios
       end
     end
     inherited tabDados: TTabSheet
-      ExplicitLeft = 1
+      ExplicitLeft = 4
       ExplicitTop = 24
       ExplicitWidth = 763
       ExplicitHeight = 402
@@ -559,5 +618,11 @@ inherited frmFuncionarios: TfrmFuncionarios
     DataSet = dmFuncionarios.cdsComboUF
     Left = 656
     Top = 384
+  end
+  object SaveDialog: TSaveDialog
+    DefaultExt = 'CSV'
+    Filter = 'CSV|*.CSV'
+    Left = 400
+    Top = 160
   end
 end

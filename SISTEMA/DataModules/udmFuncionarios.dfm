@@ -5,7 +5,9 @@ object dmFuncionarios: TdmFuncionarios
   object sqlPqFuncionario: TSQLDataSet
     CommandText = 
       'SELECT FUNC.IDFUNCIONARIO, FUNC.NMFUNCIONARIO, FUNC.NOCPF, FUNC.' +
-      'STATIVO FROM CADFUNCIONARIOS FUNC'
+      'STATIVO, FUNC.TXEMAIL,'#13#10'FUNC.DTNASCIMENTO, FUNC.DTCONTRATACAO, F' +
+      'UNC.DTDEMISSAO, FUNC.TLRESIDENCIAL, FUNC.TLCELULAR FROM CADFUNCI' +
+      'ONARIOS FUNC'
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmPrincipal.Conexao
@@ -151,7 +153,9 @@ object dmFuncionarios: TdmFuncionarios
     Aggregates = <>
     CommandText = 
       'SELECT FUNC.IDFUNCIONARIO, FUNC.NMFUNCIONARIO, FUNC.NOCPF, FUNC.' +
-      'STATIVO FROM CADFUNCIONARIOS FUNC'
+      'STATIVO, FUNC.TXEMAIL,'#13#10'FUNC.DTNASCIMENTO, FUNC.DTCONTRATACAO, F' +
+      'UNC.DTDEMISSAO, FUNC.TLRESIDENCIAL, FUNC.TLCELULAR FROM CADFUNCI' +
+      'ONARIOS FUNC'
     Params = <>
     ProviderName = 'dspPqFuncionario'
     Left = 344
@@ -166,6 +170,7 @@ object dmFuncionarios: TdmFuncionarios
     end
     object cdsPqFuncionarioNOCPF: TStringField
       FieldName = 'NOCPF'
+      OnGetText = cdsPqFuncionarioNOCPFGetText
       Size = 18
     end
     object cdsPqFuncionarioSTATIVO: TStringField
@@ -173,6 +178,27 @@ object dmFuncionarios: TdmFuncionarios
       OnGetText = cdsPqFuncionarioSTATIVOGetText
       FixedChar = True
       Size = 1
+    end
+    object cdsPqFuncionarioTXEMAIL: TStringField
+      FieldName = 'TXEMAIL'
+      Size = 100
+    end
+    object cdsPqFuncionarioDTNASCIMENTO: TDateField
+      FieldName = 'DTNASCIMENTO'
+    end
+    object cdsPqFuncionarioDTCONTRATACAO: TDateField
+      FieldName = 'DTCONTRATACAO'
+    end
+    object cdsPqFuncionarioDTDEMISSAO: TDateField
+      FieldName = 'DTDEMISSAO'
+    end
+    object cdsPqFuncionarioTLRESIDENCIAL: TStringField
+      FieldName = 'TLRESIDENCIAL'
+      Size = 15
+    end
+    object cdsPqFuncionarioTLCELULAR: TStringField
+      FieldName = 'TLCELULAR'
+      Size = 15
     end
   end
   object cdsCadFuncionario: TClientDataSet

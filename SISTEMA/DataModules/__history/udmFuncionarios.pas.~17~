@@ -1,0 +1,175 @@
+unit udmFuncionarios;
+
+interface
+
+uses
+  System.SysUtils, System.Classes, Data.FMTBcd, Data.DB, Datasnap.DBClient,
+  Datasnap.Provider, Data.SqlExpr;
+
+type
+  TdmFuncionarios = class(TDataModule)
+    sqlPqFuncionario: TSQLDataSet;
+    sqlCadFuncionario: TSQLDataSet;
+    dspPqFuncionario: TDataSetProvider;
+    dspCadFuncionario: TDataSetProvider;
+    cdsPqFuncionario: TClientDataSet;
+    cdsCadFuncionario: TClientDataSet;
+    dspComboCidade: TDataSetProvider;
+    dspComboUF: TDataSetProvider;
+    cdsComboCidade: TClientDataSet;
+    cdsComboCidadeIDCIDADE: TIntegerField;
+    cdsComboCidadeNMCIDADE: TStringField;
+    cdsComboCidadeIDUF: TIntegerField;
+    cdsComboCidadeNOIBGE: TStringField;
+    cdsComboUF: TClientDataSet;
+    cdsComboUFIDUF: TIntegerField;
+    cdsComboUFNMESTADO: TStringField;
+    cdsComboUFSGESTADO: TStringField;
+    sqlComboCidade: TSQLDataSet;
+    sqlComboUF: TSQLDataSet;
+    cdsCadFuncionarioIDFUNCIONARIO: TIntegerField;
+    cdsCadFuncionarioNMFUNCIONARIO: TStringField;
+    cdsCadFuncionarioNOCPF: TStringField;
+    cdsCadFuncionarioNORG: TStringField;
+    cdsCadFuncionarioDTNASCIMENTO: TDateField;
+    cdsCadFuncionarioTXEMAIL: TStringField;
+    cdsCadFuncionarioNOCARTEIRATRAB: TStringField;
+    cdsCadFuncionarioNOTITULOELEITOR: TStringField;
+    cdsCadFuncionarioNOCARTEIRAMOTORISTA: TStringField;
+    cdsCadFuncionarioDTVALIDADECARTEIRAMOT: TDateField;
+    cdsCadFuncionarioTLRESIDENCIAL: TStringField;
+    cdsCadFuncionarioTLCELULAR: TStringField;
+    cdsCadFuncionarioTLCONTATO: TStringField;
+    cdsCadFuncionarioNMCONTATO: TStringField;
+    cdsCadFuncionarioDTCONTRATACAO: TDateField;
+    cdsCadFuncionarioDTDEMISSAO: TDateField;
+    cdsCadFuncionarioDTCADASTRO: TDateField;
+    cdsCadFuncionarioSTATIVO: TStringField;
+    cdsCadFuncionarioTXOBS: TStringField;
+    cdsCadFuncionarioNMENDERECO: TStringField;
+    cdsCadFuncionarioNOENDERECO: TStringField;
+    cdsCadFuncionarioNMBAIRRO: TStringField;
+    cdsCadFuncionarioIDCIDADE: TIntegerField;
+    cdsCadFuncionarioIDUF: TIntegerField;
+    cdsCadFuncionarioNOCEP: TStringField;
+    cdsCadFuncionarioSTEXCLUIDO: TStringField;
+    cdsCadFuncionarioDTEXCLUIDO: TDateField;
+    cdsPqFuncionarioIDFUNCIONARIO: TIntegerField;
+    cdsPqFuncionarioNMFUNCIONARIO: TStringField;
+    cdsPqFuncionarioNOCPF: TStringField;
+    cdsPqFuncionarioSTATIVO: TStringField;
+    cdsCadFuncionarioIDEMPRESA: TIntegerField;
+    cdsCadFuncionarioTPCATERORIA: TStringField;
+    sqlCadFuncionarioIDFUNCIONARIO: TIntegerField;
+    sqlCadFuncionarioIDEMPRESA: TIntegerField;
+    sqlCadFuncionarioNMFUNCIONARIO: TStringField;
+    sqlCadFuncionarioNOCPF: TStringField;
+    sqlCadFuncionarioNORG: TStringField;
+    sqlCadFuncionarioDTNASCIMENTO: TDateField;
+    sqlCadFuncionarioTXEMAIL: TStringField;
+    sqlCadFuncionarioNOCARTEIRATRAB: TStringField;
+    sqlCadFuncionarioNOTITULOELEITOR: TStringField;
+    sqlCadFuncionarioNOCARTEIRAMOTORISTA: TStringField;
+    sqlCadFuncionarioTPCATERORIA: TStringField;
+    sqlCadFuncionarioDTVALIDADECARTEIRAMOT: TDateField;
+    sqlCadFuncionarioTLRESIDENCIAL: TStringField;
+    sqlCadFuncionarioTLCELULAR: TStringField;
+    sqlCadFuncionarioTLCONTATO: TStringField;
+    sqlCadFuncionarioNMCONTATO: TStringField;
+    sqlCadFuncionarioDTCONTRATACAO: TDateField;
+    sqlCadFuncionarioDTDEMISSAO: TDateField;
+    sqlCadFuncionarioDTCADASTRO: TDateField;
+    sqlCadFuncionarioSTATIVO: TStringField;
+    sqlCadFuncionarioTXOBS: TStringField;
+    sqlCadFuncionarioNMENDERECO: TStringField;
+    sqlCadFuncionarioNOENDERECO: TStringField;
+    sqlCadFuncionarioNMBAIRRO: TStringField;
+    sqlCadFuncionarioIDCIDADE: TIntegerField;
+    sqlCadFuncionarioIDUF: TIntegerField;
+    sqlCadFuncionarioNOCEP: TStringField;
+    sqlCadFuncionarioSTEXCLUIDO: TStringField;
+    sqlCadFuncionarioDTEXCLUIDO: TDateField;
+    procedure cdsPqFuncionarioSTATIVOGetText(Sender: TField; var Text: string;
+      DisplayText: Boolean);
+    procedure cdsCadFuncionarioTLRESIDENCIALGetText(Sender: TField;
+      var Text: string; DisplayText: Boolean);
+    procedure cdsCadFuncionarioTLCELULARGetText(Sender: TField;
+      var Text: string; DisplayText: Boolean);
+    procedure cdsCadFuncionarioTLCONTATOGetText(Sender: TField;
+      var Text: string; DisplayText: Boolean);
+    procedure cdsCadFuncionarioNOCPFGetText(Sender: TField; var Text: string;
+      DisplayText: Boolean);
+    procedure cdsCadFuncionarioAfterOpen(DataSet: TDataSet);
+    procedure cdsCadFuncionarioAfterPost(DataSet: TDataSet);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  dmFuncionarios: TdmFuncionarios;
+
+implementation
+
+uses
+  udmPrincipal, uFuncoesDB;
+
+{%CLASSGROUP 'Vcl.Controls.TControl'}
+
+{$R *.dfm}
+
+procedure TdmFuncionarios.cdsCadFuncionarioAfterOpen(DataSet: TDataSet);
+begin
+  cdsComboCidade.Close;
+  cdsComboCidade.Open;
+
+  cdsComboUF.Close;
+  cdsComboUF.Open;
+end;
+
+procedure TdmFuncionarios.cdsCadFuncionarioAfterPost(DataSet: TDataSet);
+begin
+  if cdsCadFuncionario.FieldByName('IDFUNCIONARIO').AsInteger = 0 then
+  begin
+    cdsCadFuncionario.Edit;
+    cdsCadFuncionario.FieldByName('IDFUNCIONARIO').AsInteger := PegarCodigoAutoIncrement('CADFUNCIONARIOS');
+  end;
+end;
+
+procedure TdmFuncionarios.cdsCadFuncionarioNOCPFGetText(Sender: TField;
+  var Text: string; DisplayText: Boolean);
+begin
+  Text := MascaraCnpjCpf(Sender, DisplayText);
+end;
+
+procedure TdmFuncionarios.cdsCadFuncionarioTLCELULARGetText(Sender: TField;
+  var Text: string; DisplayText: Boolean);
+begin
+  Text := MascaraTelefone(Sender, DisplayText);
+end;
+
+procedure TdmFuncionarios.cdsCadFuncionarioTLCONTATOGetText(Sender: TField;
+  var Text: string; DisplayText: Boolean);
+begin
+  Text := MascaraTelefone(Sender, DisplayText);
+end;
+
+procedure TdmFuncionarios.cdsCadFuncionarioTLRESIDENCIALGetText(Sender: TField;
+  var Text: string; DisplayText: Boolean);
+begin
+  Text := MascaraTelefone(Sender, DisplayText);
+end;
+
+procedure TdmFuncionarios.cdsPqFuncionarioSTATIVOGetText(Sender: TField;
+  var Text: string; DisplayText: Boolean);
+begin
+  if (Sender as TStringField).Value = 'S' then
+    Text := 'SIM'
+  else if (Sender as TStringField).Value = 'N' then
+    Text := 'NAO'
+  else
+    Text := '';
+end;
+
+end.

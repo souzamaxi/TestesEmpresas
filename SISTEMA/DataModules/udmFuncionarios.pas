@@ -89,6 +89,12 @@ type
     sqlCadFuncionarioNOCEP: TStringField;
     sqlCadFuncionarioSTEXCLUIDO: TStringField;
     sqlCadFuncionarioDTEXCLUIDO: TDateField;
+    cdsPqFuncionarioTXEMAIL: TStringField;
+    cdsPqFuncionarioDTNASCIMENTO: TDateField;
+    cdsPqFuncionarioDTCONTRATACAO: TDateField;
+    cdsPqFuncionarioDTDEMISSAO: TDateField;
+    cdsPqFuncionarioTLRESIDENCIAL: TStringField;
+    cdsPqFuncionarioTLCELULAR: TStringField;
     procedure cdsPqFuncionarioSTATIVOGetText(Sender: TField; var Text: string;
       DisplayText: Boolean);
     procedure cdsCadFuncionarioTLRESIDENCIALGetText(Sender: TField;
@@ -101,6 +107,8 @@ type
       DisplayText: Boolean);
     procedure cdsCadFuncionarioAfterOpen(DataSet: TDataSet);
     procedure cdsCadFuncionarioAfterPost(DataSet: TDataSet);
+    procedure cdsPqFuncionarioNOCPFGetText(Sender: TField; var Text: string;
+      DisplayText: Boolean);
   private
     { Private declarations }
   public
@@ -159,6 +167,12 @@ procedure TdmFuncionarios.cdsCadFuncionarioTLRESIDENCIALGetText(Sender: TField;
   var Text: string; DisplayText: Boolean);
 begin
   Text := MascaraTelefone(Sender, DisplayText);
+end;
+
+procedure TdmFuncionarios.cdsPqFuncionarioNOCPFGetText(Sender: TField;
+  var Text: string; DisplayText: Boolean);
+begin
+  Text := MascaraCnpjCpf(Sender, DisplayText);
 end;
 
 procedure TdmFuncionarios.cdsPqFuncionarioSTATIVOGetText(Sender: TField;

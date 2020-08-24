@@ -69,10 +69,20 @@ type
     Label28: TLabel;
     Label29: TLabel;
     dbDTDEMISSAO: TDBEdit;
+    SaveDialog: TSaveDialog;
+    btnExportar: TButton;
+    dtpkFinal: TDateTimePicker;
+    dtpkInicial: TDateTimePicker;
+    Label30: TLabel;
+    Label31: TLabel;
+    ckFiltroData: TCheckBox;
     procedure btnBuscarClick(Sender: TObject);
     procedure btnNovoClick(Sender: TObject);
     procedure btnExcluirClick(Sender: TObject);
     procedure grDadosDblClick(Sender: TObject);
+    procedure btnExportarClick(Sender: TObject);
+    procedure dtpkInicialChange(Sender: TObject);
+    procedure dtpkFinalChange(Sender: TObject);
   private
     { Private declarations }
   public
@@ -85,7 +95,7 @@ var
 implementation
 
 uses
-  udmFuncionarios, udmPrincipal;
+  udmFuncionarios, udmPrincipal, uFuncoesDB;
 
 {$R *.dfm}
 
@@ -97,7 +107,8 @@ begin
   aSQL := TStringList.Create;
   try
     aSQL.Clear;
-    aSQL.Add('SELECT FUNC.IDFUNCIONARIO, FUNC.NMFUNCIONARIO, FUNC.NOCPF, FUNC.STATIVO FROM CADFUNCIONARIOS FUNC');
+    aSQL.Add('SELECT FUNC.IDFUNCIONARIO, FUNC.NMFUNCIONARIO, FUNC.NOCPF, FUNC.STATIVO, FUNC.TXEMAIL,');
+    aSQL.Add('FUNC.DTNASCIMENTO, FUNC.DTCONTRATACAO, FUNC.DTDEMISSAO, FUNC.TLRESIDENCIAL, FUNC.TLCELULAR FROM CADFUNCIONARIOS FUNC');
     if StrToIntDef(edtFiltro.Text, 0) = 0 then
     begin
       aSQL.Add('WHERE (UPPER(FUNC.NMFUNCIONARIO) LIKE ''%' + AnsiUpperCase(edtFiltro.Text) + '%'' OR ');
@@ -109,6 +120,12 @@ begin
     end;
 
     aSQL.Add('  AND (FUNC.STEXCLUIDO = ''N'' OR FUNC.STEXCLUIDO IS NULL) ');
+
+    if ckFiltroData.Checked then
+    begin
+      aSQL.Add('  AND DTCADASTRO BETWEEN ' + QuotedStr(FormatDateTime('yyyy/mm/dd', dtpkInicial.Date)) +
+        ' AND ' + QuotedStr(FormatDateTime('yyyy/mm/dd', dtpkInicial.Date)));
+    end;
 
     dmFuncionarios.cdsPqFuncionario.Close;
     dmFuncionarios.cdsPqFuncionario.CommandText := aSQL.Text;
@@ -144,7 +161,16 @@ begin
       FreeAndNil(oDados);
       FreeAndNil(aSQL);
     end;
-    dmFuncionarios.cdsPqFuncionario.Close;
+    dmFuncionarios.cdsCadFuncionario.Close;
+  end;
+end;
+
+procedure TfrmFuncionarios.btnExportarClick(Sender: TObject);
+begin
+  inherited;
+  if SaveDialog.Execute then
+  begin
+    ExportarConsultaCSV(dmFuncionarios.cdsPqFuncionario, SaveDialog.FileName);
   end;
 end;
 
@@ -156,7 +182,26 @@ begin
   dmFuncionarios.cdsCadFuncionario.FieldByName('STEXCLUIDO').AsString := 'N';
 end;
 
+procedure TfrmFuncionarios.dtpkFinalChange(Sender: TObject);
+begin
+  inherited;
+  if dtpkFinal.Date < dtpkInicial.Date then
+  begin
+    Application.MessageBox('A data final não pode ser menor que a data inicial!', 'SISTEMA', MB_ICONEXCLAMATION + MB_OK + MB_SYSTEMMODAL);
+  end
+  else
+    ckFiltroData.Checked := True;
+end;
+
+procedure TfrmFuncionarios.dtpkInicialChange(Sender: TObject);
+begin
+  inherited;
+  ckFiltroData.Checked := True;
+end;
+
 procedure TfrmFuncionarios.grDadosDblClick(Sender: TObject);
+var
+  Stream: TFileStream;
 begin
   inherited;
   if dmFuncionarios.cdsPqFuncionario.RecordCount > 0 then
